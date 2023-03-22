@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer utilities {
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: antialiased;
+        box-sizing: border-box;
+    }
+    html, body {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    [cloak] {
+        display: none;
+    }
+
+    .font-primary {
+        font-family: 'Comfortaa', sans-serif;
+    }
+    .font-secondary {
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    // NProgress
+    #nprogress {
+        .bar {
+            @apply bg-primary-500;
+        }
+        .spinner-icon {
+            @apply border-primary-500;
+        }
+    }
+
+    // Universal Loader
+    .loader {
+        @apply inline-block aspect-square border-2 border-b-transparent border-r-transparent border-t-primary-500 border-l-primary-500 rounded-full animate-spin;
+        animation-duration: 0.6s;
+    }
+
+    // Scroll bar
+    .custom-scroll {
+        &::-webkit-scrollbar-track {
+            @apply bg-transparent;
+        }
+        &::-webkit-scrollbar {
+            @apply transition-all duration-300 w-0 h-0 sm:w-2 sm:h-4 bg-transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            @apply bg-primary-500 hover:bg-primary-600 rounded-lg m-1;
+        }
+        &.overlapping {
+            overflow: overlay;
+            &::-webkit-scrollbar-thumb {
+                @apply hidden;
+            }
+            &:hover::-webkit-scrollbar-thumb {
+                display: inherit;
+            }
+        }
+    }
+
+    .form {
+        @apply max-w-screen-md w-full mx-auto flex flex-row justify-center items-stretch;
+        .search-bar {
+            @apply flex-1 px-4 py-2 rounded-l-lg outline-0 font-medium transition-colors text-gray-800 dark:text-white;
+            @apply bg-gray-200 dark:bg-gray-700;
+            @apply border-2 border-r-0 border-gray-300 dark:border-gray-600 focus:border-primary-600 dark:focus:border-primary-600;
+        }
+        .search-btn {
+            @apply w-12 rounded-r-lg inline-grid place-items-center text-white transition-colors;
+            @apply bg-primary-600 lg:hover:bg-primary-700 lg:active:bg-primary-800;
+            @apply border-2 border-l-0 border-primary-600 lg:hover:border-primary-700 lg:active:border-primary-800;
+        }
+    }
+}
