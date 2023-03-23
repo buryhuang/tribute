@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Metadata from '@comps/Metadata';
 import Head from 'next/head';
 import Link from 'next/link';
 import { Configuration, OpenAIApi } from "openai";
 import Modal from '@comps/Modal';
+import axios from 'axios';
 
 const openAiConfig = new Configuration({
 	apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -69,6 +70,14 @@ function Body() {
 	const [search, setSearch] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [result, setResult] = useState([]);
+	const [openedImage, setOpenedImage] = useState('');
+	const [imageInfo, setImageInfo] = useState([]);
+
+	useEffect(() => {
+		if(openedImage === '') return;
+
+		fetchImageInfo();
+	}, [openedImage]);
 
 	const handleSearch = async (event) => {
 		event.preventDefault();
@@ -82,9 +91,37 @@ function Body() {
 			size: "1024x1024",
 		});
 
-		console.log(response.data);
 		setResult(response.data);
 		setIsLoading(false);
+	}
+
+	const fetchImageInfo = async _ => {
+		try {
+			const { data:response } = await axios({
+				url: 'https://jsonplaceholder.typicode.com/posts',
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Access-Control-Allow-Origin': window?.location?.origin || '*',
+				},
+			});
+
+			console.log(response);
+			// setImageInfo(response);
+			setImageInfo([
+				{
+					name: 'Robert Downey Jr.',
+					percentage: 80,
+				},
+				{
+					name: 'Chris Evans',
+					percentage: 20,
+				}
+			])
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	return (
@@ -144,23 +181,61 @@ function Body() {
 				: result && result.data && result.data.length
 					? <div className='mt-4 sm:mt-8 max-w-screen-lg w-full mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4'>
 						{
-							result?.data?.map((img, index) => <Img key={index} src={img?.url} />)
+							result?.data?.map((img, index) => <Img
+								key={index}
+								img={img}
+								onOpen={src => {
+									setOpenedImage(src)
+									setImageInfo([]);
+								}}
+							/>)
 						}
 					</div>
 					: null
 			}
 
+			<Modal
+				isVisible={openedImage !== ''}
+				isCloseable={true}
+				title='Preview'
+				maxWidth='sm:max-w-lg 2xl:max-w-xl 3xl:max-w-screen-sm'
+				onClose={_ => setOpenedImage('')}
+			>
+				<div className='relative'>
+					<img
+						src={openedImage}
+						alt=''
+						width={100}
+						height={100}
+						loading='lazy'
+						className='w-full aspect-square object-contain pointer-events-none rounded'
+					/>
+
+					{/* Image artists */}
+					{
+						imageInfo && imageInfo?.length
+						? imageInfo?.map((info, index) => {
+							return (
+								<div key={index} className='mt-4 px-2 bg-black bg-opacity-80 backdrop-blur-sm font-semibold text-sm text-primary-500'>
+									<h3>{info?.name} - <span className='text-white'>{info?.percentage}%</span></h3>
+								</div>
+							)
+						})
+						: null
+					}
+				</div>
+			</Modal>
 		</main>
 	)
 }
 
-function Img({ src }) {
+function Img({ img, onOpen }) {
 	return (
 		<div
 			className='img-wrapper relative rounded sm:rounded-lg overflow-hidden lg:hover:scale-[102%] transition-transform'
 		>
 			<img
-				src={src}
+				src={img?.url}
 				alt=''
 				width={100}
 				height={100}
@@ -172,6 +247,7 @@ function Img({ src }) {
 				<button
 					type='button'
 					className='bg-primary-600 lg:hover:bg-primary-700 lg:active:bg-primary-800 text-white text-lg font-semibold px-6 py-2 rounded-lg transition-colors shadow'
+					onClick={_ => onOpen(img?.url)}
 				>Mint</button>
 			</div>
 		</div>
