@@ -154,6 +154,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@openzeppelin/contracts@^4.8.2":
+  version "4.8.2"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.8.2.tgz#d815ade0027b50beb9bcca67143c6bcc3e3923d6"
+  integrity sha512-kEUOgPQszC0fSYWpbh2kT94ltOJwj1qfT2DWo+zVttmGmf97JZ99LspePNaeeaLhCImaHVeBbjaQFZQn7+Zc5g==
+
 "@pkgr/utils@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@pkgr/utils/-/utils-2.3.1.tgz#0a9b06ffddee364d6642b3cd562ca76f55b34a03"
@@ -255,6 +260,20 @@ acorn@^8.8.0:
   version "8.8.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.0.tgz#88c0187620435c7f6015803f5539dae05a9dbea8"
   integrity sha512-QOxyigPVrpZ2GXT+PFyZTl6TtOFc5egxHIP9IlQ+RbupQuX4RkT/Bee4/kQuC02Xkzg84JcT7oLYtDIQxp+v7w==
+
+ajax-caching@^0.1.0:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/ajax-caching/-/ajax-caching-0.1.2.tgz#fdc9abfde3671dd0074b645965b5e072865f596a"
+  integrity sha512-sR4BataOHBqyhzfjhY6XlmaL6ifysUn1YwoN2PoToKwB0vGZ0G8opPMiBwQfIZ4MGc1YX4M3UlZzGnXcsIE88Q==
+  dependencies:
+    kv-idb "^1.1.0"
+
+ajax-caching@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/ajax-caching/-/ajax-caching-0.2.0.tgz#8efd67704d117b52634f1ccb86dbc88ca00570b3"
+  integrity sha512-WUDWUS1V/I3qquf4fxZECiaAbtN7apPzfkpfyvE4nBIT6FInwYT8smrmDJOL/FqQAwGQOJh4gEseBg0xcOj7Qw==
+  dependencies:
+    kv-idb "^1.1.0"
 
 ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
@@ -1435,6 +1454,11 @@ json5@^1.0.1:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
 
+kv-idb@^1.0.0, kv-idb@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/kv-idb/-/kv-idb-1.1.0.tgz#5773dc7c7df39f4a6470fb708607babe04b02427"
+  integrity sha512-H1qsvb/rZcJX573DGonc6l1hNG283JfnmBck83aiLmjI1nwaiudUinjzaWmwa8QZkjHsMUDkXm4D1k4ewjlo/g==
+
 language-subtag-registry@~0.3.2:
   version "0.3.21"
   resolved "https://registry.yarnpkg.com/language-subtag-registry/-/language-subtag-registry-0.3.21.tgz#04ac218bea46f04cb039084602c6da9e788dd45a"
@@ -1491,6 +1515,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash@^4.17.15:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -2022,6 +2051,30 @@ resolve-from@^4.0.0:
   resolved "https://registry.yarnpkg.com/resolve-from/-/resolve-from-4.0.0.tgz#4abcd852ad32dd7baabfe9b40e00a36db5f392e6"
   integrity sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==
 
+resolve-github@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/resolve-github/-/resolve-github-0.2.0.tgz#0fa94526a974f1948b57f2c7300f949c1195cb9e"
+  integrity sha512-Ocaoo1zeCaNPduCzzPLtUvoUOmbzjyBs4Eq/jEzZkknzhuH53roeD8NUHg9ZjwDBpcuMiOqaoiskAnURKxopag==
+  dependencies:
+    solc-import "0.0.2"
+
+resolve-http@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/resolve-http/-/resolve-http-0.2.0.tgz#0493545d14e25d0834a5dc0d3c9f5d58538e203f"
+  integrity sha512-XInHhoHbU4wwLXcrWB1ULPN/RzEzopenfePeykv9IssY1oF1evUDIBMODMJpYl3zxRZsqqOHsrA8lcb/4ZsvgQ==
+  dependencies:
+    solc-import "0.0.2"
+
+resolve-ipfs@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/resolve-ipfs/-/resolve-ipfs-0.1.0.tgz#5a32938e237c7234bd1ca1450d14786c4669b44b"
+  integrity sha512-TLvn09WQ01AZTFoZK1aSidmdUnCxQfTuehEutF6w8kRoXw1hL3jlDw5djKJlIVADihXp2HWguZR4hZXAtLkFSw==
+
+resolve-swarm@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/resolve-swarm/-/resolve-swarm-0.1.0.tgz#1fa54a1b6ffab9b3bbfd9da6879220e0e9110d08"
+  integrity sha512-fhI2FSkN6SLUJCWf7Svf3rW9AdSxS4KQCJzvAPSJZRmg1bPz+Ek/fRmNUkv5ihtrNiW8wury+XxQZoS+6LbHHg==
+
 resolve@^1.1.7, resolve@^1.20.0, resolve@^1.22.0, resolve@^1.22.1:
   version "1.22.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"
@@ -2124,6 +2177,58 @@ slash@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-4.0.0.tgz#2422372176c4c6c5addb5e2ada885af984b396a7"
   integrity sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==
+
+solc-import@0.0.2, solc-import@^0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/solc-import/-/solc-import-0.0.2.tgz#67bcc8be970d999fc8d92e076d1069c8c732d681"
+  integrity sha512-NQMUiz2c1xm62Q1VhgTGa2DUQWr6bIpPIJxDhg77YPfCyrq4GO/o1BP0brp9gTpNzjYODG9I2Wh8vB8eJxFjXA==
+
+solc-js@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/solc-js/-/solc-js-1.0.1.tgz#42f3c05e03b9ce01029fe5323a144af7aca2690e"
+  integrity sha512-+DjNJLfbOteWSkGLiWUBPvhFa4iq6Eo/a7rrVNz/B79Oz0DiwMha6kPrfZbYcTQ0ZbZBlVGB2EXAipKFI4kJHw==
+  dependencies:
+    ajax-caching "^0.1.0"
+    kv-idb "^1.0.0"
+    resolve-github "^0.2.0"
+    resolve-http "^0.2.0"
+    resolve-ipfs "^0.1.0"
+    resolve-swarm "^0.1.0"
+    solc-import "^0.0.2"
+    solc-resolver "^0.2.1"
+    solc-version "^0.1.6"
+    solcjs-core "^0.6.0"
+
+solc-resolver@^0.2.1:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/solc-resolver/-/solc-resolver-0.2.3.tgz#081986955e3dce9617788b8af07c8087dedf3c5f"
+  integrity sha512-nYji6nNFWauxzSDUNGWCcRJxy18MTDezYFpP2j+dFf0eDUY5G1e7XyJosyVIsddrUk8MCTBecZ8kFi5wS7cfZQ==
+  dependencies:
+    solc-import "^0.0.2"
+
+solc-version@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/solc-version/-/solc-version-0.1.6.tgz#45fb28fe823d5194e9946679274af8c305a621cc"
+  integrity sha512-oGi7NQUQJf9xFQBIkUEm2NMOWhezgSEfyR8EOBv0okdgNkKZg8LUJIJ3G1czdwgUkAQPMpVRxqCE/JK4B+cCmw==
+  dependencies:
+    ajax-caching "^0.1.0"
+
+solc-version@^0.2.0:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/solc-version/-/solc-version-0.2.2.tgz#ae78523073ab871b18aadf958f85877047de11a8"
+  integrity sha512-CNdemSq0W0OcSD6B9OYkUmJaWuQOX5YMEYUJ5vkHFJwwCnFnmE/jAW08wLexaH/+XbMTsrV1IxcAnHnx3STHrQ==
+  dependencies:
+    ajax-caching "^0.2.0"
+    lodash "^4.17.15"
+
+solcjs-core@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/solcjs-core/-/solcjs-core-0.6.0.tgz#12eab277b91d42870caa44a98d369b538f050bc3"
+  integrity sha512-PSuiSMMFnjQSn2PMr/Ae4kYPum+NVneZDA5hiZrOhG59t4gDRPt0bSdRjdlVgWFmTQTqsd5aJ9u+P0x7L7lJDg==
+  dependencies:
+    ajax-caching "^0.2.0"
+    solc-import "^0.0.2"
+    solc-version "^0.2.0"
 
 "source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.2:
   version "1.0.2"
