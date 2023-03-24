@@ -1,37 +1,90 @@
-import io
-import json
-
-from PIL import Image
 from flask import Flask, request, jsonify
-from transformers import CLIPProcessor, CLIPModel
+import os
+import subprocess
+import torch
+import gradio as gr
+from clip_interrogator import Config, Interrogator
 
 app = Flask(__name__)
 
-# Load the CLIP model and processor
-model = CLIPModel.from_pretrained("fffiloni/CLIP-Interrogator-2")
-processor = CLIPProcessor.from_pretrained("fffiloni/CLIP-Interrogator-2", use_auth_token=True)
+
+def setup():
+    install_cmds = [
+        ['pip', 'install', 'ftfy', 'gradio', 'regex', 'tqdm', 'transformers==4.21.2', 'timm', 'fairscale', 'requests'],
+        ['pip', 'install', 'open_clip_torch'],
+        ['pip', 'install', '-e', 'git+https://github.com/pharmapsychotic/BLIP.git@lib#egg=blip'],
+        ['git', 'clone', '-b', 'open-clip', 'https://github.com/pharmapsychotic/clip-interrogator.git']
+    ]
+    for cmd in install_cmds:
+        print(subprocess.run(cmd, stdout=subprocess.PIPE).stdout.decode('utf-8'))
 
 
-# Define the API endpoint
-@app.route('/extract_text', methods=['POST'])
+setup()
+
+# download cache files
+print("Download preprocessed cache files...")
+CACHE_URLS = [
+    'https://huggingface.co/pharma/ci-preprocess/resolve/main/ViT-H-14_laion2b_s32b_b79k_artists.pkl',
+    'https://huggingface.co/pharma/ci-preprocess/resolve/main/ViT-H-14_laion2b_s32b_b79k_flavors.pkl',
+    'https://huggingface.co/pharma/ci-preprocess/resolve/main/ViT-H-14_laion2b_s32b_b79k_mediums.pkl',
+    'https://huggingface.co/pharma/ci-preprocess/resolve/main/ViT-H-14_laion2b_s32b_b79k_movements.pkl',
+    'https://huggingface.co/pharma/ci-preprocess/resolve/main/ViT-H-14_laion2b_s32b_b79k_trendings.pkl',
+]
+os.makedirs('cache', exist_ok=True)
+for url in CACHE_URLS:
+    print(subprocess.run(['wget', url, '-P', 'cache'], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+
+import sys
+
+sys.path.append('src/blip')
+sys.path.append('clip-interrogator')
+
+config = Config()
+config.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+config.blip_offload = False if torch.cuda.is_available() else True
+config.chunk_size = 2048
+config.flavor_intermediate_count = 512
+config.blip_num_beams = 64
+
+ci = Interrogator(config)
+
+
+def inference(image, mode, best_max_flavors):
+    image = image.convert('RGB')
+    if mode == 'best':
+        prompt_result = ci.interrogate(image, max_flavors=int(best_max_flavors))
+        print("mode best: " + prompt_result)
+        return prompt_result
+
+    elif mode == 'classic':
+        prompt_result = ci.interrogate_classic(image)
+        print("mode classic: " + prompt_result)
+        return prompt_result
+
+    else:
+        prompt_result = ci.interrogate_fast(image)
+        print("mode fast: " + prompt_result)
+        return prompt_result
+
+
+@app.route('/', methods=['POST'])
 def extract_text():
-    # Get the image data from the request body
-    image_data = request.get_data()
+    # Get image from request
+    image = request.files['image'].read()
 
-    # Convert the image data to a PIL image
-    image = Image.open(io.BytesIO(image_data))
+    # Get mode and best_max_flavors from request
+    mode = request.form['mode']
+    best_max_flavors = request.form['best_max_flavors']
 
-    # Preprocess the image for the CLIP model
-    inputs = processor(image, return_tensors="pt", padding=True)
+    # Convert image to PIL Image object
+    image = Image.open(io.BytesIO(image))
 
-    # Pass the image through the CLIP model
-    outputs = model(**inputs)
+    # Run inference on image
+    text = inference(image, mode, best_max_flavors)
 
-    # Get the text embeddings from the CLIP model
-    text_embeddings = outputs.last_hidden_state[:, 0, :]
-
-    # Decode the text embeddings to get the corresponding text
-    text = processor.decode(text_embeddings)
-
-    # Return the extracted text as a JSON response
+    # Return extracted text in JSON format
     return jsonify({'text': text})
+
+
+if __name__ == '__main__':
+    app.run()
