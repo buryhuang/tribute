@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # Load the CLIP model and processor
 model = CLIPModel.from_pretrained("fffiloni/CLIP-Interrogator-2")
-processor = CLIPProcessor.from_pretrained("fffiloni/CLIP-Interrogator-2")
+processor = CLIPProcessor.from_pretrained("fffiloni/CLIP-Interrogator-2", use_auth_token=True)
 
 
 # Define the API endpoint
