@@ -111,17 +111,17 @@ function Body() {
 			});
 
 			console.log(response);
-			// setImageInfo(response);
-			setImageInfo([
-				{
-					name: 'Robert Downey Jr.',
-					percentage: 80,
-				},
-				{
-					name: 'Chris Evans',
-					percentage: 20,
-				}
-			])
+			setImageInfo(response.data);
+			// setImageInfo([
+			// 	{
+			// 		name: 'Robert Downey Jr.',
+			// 		percentage: 80,
+			// 	},
+			// 	{
+			// 		name: 'Chris Evans',
+			// 		percentage: 20,
+			// 	}
+			// ])
 		} catch (err) {
 			console.log(err);
 		}
