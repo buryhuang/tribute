@@ -14,20 +14,20 @@ contract AIArtFractionalNFT is ERC721 {
     Counters.Counter private _tokenIdCounter;
 
     mapping(uint256 => Artist[]) private artistList;
-    mapping(uint256 => bytes32) private imageHashList;
+    mapping(uint256 => string) private imageHashList;
     mapping(address => uint256[]) private ownedTokens;
 
     uint256 private feePercentage = 5;
     address public contractOwner;
 
-    event ArtMinted(uint256 indexed tokenId, bytes32 imageHash, address[] artistAddresses, uint256[] ownershipPercentages);
+    event ArtMinted(uint256 indexed tokenId, string imageHash, address[] artistAddresses, uint256[] ownershipPercentages);
     event FeesDistributed(uint256 indexed tokenId, address[] artistAddresses, uint256[] distributedAmounts);
 
     constructor(string memory name, string memory symbol) ERC721(name, symbol) {
         contractOwner = msg.sender;
     }
 
-    function mintAIArt(address[] memory artistAddresses, uint256[] memory ownershipPercentages, bytes32 imageHash) public payable {
+    function mintAIArt(address[] memory artistAddresses, uint256[] memory ownershipPercentages, string memory imageHash) public payable {
         require(artistAddresses.length > 0, "At least one referenced artist address is required");
         require(artistAddresses.length == ownershipPercentages.length, "Artist addresses and ownership percentages length mismatch");
         require(msg.value > 0, "Fee required to mint AIArt");
@@ -90,7 +90,7 @@ contract AIArtFractionalNFT is ERC721 {
         return ownershipPercentages;
     }
 
-    function getImageHash(uint256 tokenId) public view returns (bytes32) {
+    function getImageHash(uint256 tokenId) public view returns (string memory) {
         return imageHashList[tokenId];
     }
 
