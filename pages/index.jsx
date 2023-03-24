@@ -87,8 +87,8 @@ function Body() {
 		setIsLoading(true);
 		const response = await openai.createImage({
 			prompt: search,
-			n: 6,
-			size: "1024x1024",
+			n: 4,
+			size: "512x512",
 		});
 
 		setResult(response.data);
