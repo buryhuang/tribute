@@ -67,7 +67,7 @@ function Header({ openAboutModal }) {
 }
 
 function Body() {
-	const [search, setSearch] = useState('');
+	const [search, setSearch] = useState('man calling taxi in Newyork street, oil painting');
 	const [isLoading, setIsLoading] = useState(false);
 	const [result, setResult] = useState([]);
 	const [openedImage, setOpenedImage] = useState('');
@@ -87,7 +87,7 @@ function Body() {
 		setIsLoading(true);
 		const response = await openai.createImage({
 			prompt: search,
-			n: 4,
+			n: 1,
 			size: "512x512",
 		});
 
@@ -98,13 +98,16 @@ function Body() {
 	const fetchImageInfo = async _ => {
 		try {
 			const { data:response } = await axios({
-				url: 'https://jsonplaceholder.typicode.com/posts',
-				method: 'GET',
+				url: 'http://127.0.0.1:5000/process_image',
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 					'Accept': 'application/json',
 					'Access-Control-Allow-Origin': window?.location?.origin || '*',
 				},
+				data: {
+					image_url: openedImage,
+				}
 			});
 
 			console.log(response);
