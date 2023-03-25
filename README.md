@@ -2,7 +2,7 @@
 
 # Deployed Fractional NFT
 ## on OKExChain TestNet (65)
-## NFT Contract Address: 0x60d59E8A52325AE1a660a2bBA785947Db20FC0D7
+## NFT Contract Address: 0x24F09C1BC3f1132f93766C0B7a5CC01F14d76F7E
 
 # Starting Service
 ```
