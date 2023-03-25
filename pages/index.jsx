@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Configuration, OpenAIApi } from "openai";
 import Modal from '@comps/Modal';
 import axios from 'axios';
+import Web3 from 'web3';
 
 const openAiConfig = new Configuration({
 	apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -97,21 +98,21 @@ function Body() {
 
 	const fetchImageInfo = async _ => {
 		try {
-			const { data:response } = await axios({
-				url: 'http://127.0.0.1:5000/process_image',
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'Accept': 'application/json',
-					'Access-Control-Allow-Origin': window?.location?.origin || '*',
-				},
-				data: {
-					image_url: openedImage,
-				}
-			});
+			// const { data:response } = await axios({
+			// 	url: 'http://127.0.0.1:5000/process_image',
+			// 	method: 'POST',
+			// 	headers: {
+			// 		'Content-Type': 'application/json',
+			// 		'Accept': 'application/json',
+			// 		'Access-Control-Allow-Origin': window?.location?.origin || '*',
+			// 	},
+			// 	data: {
+			// 		image_url: openedImage,
+			// 	}
+			// });
 
-			console.log(response);
-			setImageInfo(response.data);
+			// console.log(response);
+			// setImageInfo(response.data);
 			// setImageInfo([
 			// 	{
 			// 		name: 'Robert Downey Jr.',
@@ -122,6 +123,48 @@ function Body() {
 			// 		percentage: 20,
 			// 	}
 			// ])
+			// Import necessary libraries
+
+			// Connect to the OKEx blockchain using web3
+			if (window.ethereum) {
+				console.log(window.ethereum);
+				const web3 = new Web3(window.ethereum);
+				try {
+					window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
+					// User has allowed account access to MetaMask
+					console.log(accounts);
+
+					// Create a transaction object to send OKT currency
+					const recipientAddress = '0x0B057e1f7eaD6a351418181930F2328E6f5408A3'; // Replace with recipient's wallet address
+					const amount = web3.utils.toWei('10', 'wei'); // Replace with desired amount of OKT currency to send
+					const transaction = {
+						from: accounts[0], // Replace with your wallet address
+						to: recipientAddress,
+						value: amount,
+						gas: 200000,
+					};
+		
+					// Send the transaction using MetaMask
+					web3.eth.sendTransaction(transaction)
+					.once('transactionHash', (hash) => {
+						console.log('Transaction hash:', hash);
+					})
+					.once('receipt', (receipt) => {
+						console.log('Transaction receipt:', receipt);
+					})
+					.on('error', (error) => {
+						console.error('Transaction error:', error);
+					});
+				  });
+				} catch (error) {
+				  // User has denied account access to MetaMask
+				}
+			  } else if (window.web3) {
+				const web3 = new Web3(window.web3.currentProvider);
+			  } else {
+				// No web3 provider detected
+			  }
+
 		} catch (err) {
 			console.log(err);
 		}
