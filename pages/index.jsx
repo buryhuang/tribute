@@ -99,7 +99,7 @@ function Body() {
 	const fetchImageInfo = async _ => {
 		try {
 			const { data:response } = await axios({
-				url: 'http://127.0.0.1:5000/process_image',
+				url: 'https://gtfnazi3x5.execute-api.us-east-1.amazonaws.com/process_image',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

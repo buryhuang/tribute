@@ -220,13 +220,13 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tribute-api/dev/1679870616271-2023-03-26T22:43:36.271Z/tribute-api.zip"
+                "S3Key": "serverless/tribute-api/dev/1679871308430-2023-03-26T22:55:08.430Z/tribute-api.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "python3.9",
               "FunctionName": "tribute-api-dev-api",
               "MemorySize": 1024,
-              "Timeout": 6,
+              "Timeout": 60,
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -238,14 +238,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionqGKwTBXxkT452unlpbZs4kNEFzG15haXJKXulCWTv0": {
+          "ApiLambdaVersionVtRfDDrmpbyLrtTY2TMGyiLC90hifYGU2LYx6Fee0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "liBMs2dQV+rhGaZY6rZRNJiCI1QBFIws1kyE2HHCvjU="
+              "CodeSha256": "J2xP62W4rWXH0fOXEO2BY197wOfH/7ZJnszRJRavJik="
             }
           },
           "HttpApi": {
@@ -400,7 +400,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionqGKwTBXxkT452unlpbZs4kNEFzG15haXJKXulCWTv0"
+              "Ref": "ApiLambdaVersionVtRfDDrmpbyLrtTY2TMGyiLC90hifYGU2LYx6Fee0"
             },
             "Export": {
               "Name": "sls-tribute-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -544,6 +544,7 @@
     "functions": {
       "api": {
         "handler": "s_api.handler",
+        "timeout": 60,
         "events": [
           {
             "httpApi": "*",
@@ -553,10 +554,9 @@
         "name": "tribute-api-dev-api",
         "package": {},
         "memory": 1024,
-        "timeout": 6,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionqGKwTBXxkT452unlpbZs4kNEFzG15haXJKXulCWTv0"
+        "versionLogicalId": "ApiLambdaVersionVtRfDDrmpbyLrtTY2TMGyiLC90hifYGU2LYx6Fee0"
       }
     },
     "configValidationMode": "warn",
@@ -589,7 +589,7 @@
     "artifact": "/Users/bury.huang/git/webapp/tribute/tribute-api/.serverless/tribute-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/tribute-api/dev/1679870616271-2023-03-26T22:43:36.271Z",
+    "artifactDirectoryName": "serverless/tribute-api/dev/1679871308430-2023-03-26T22:55:08.430Z",
     "artifact": "tribute-api.zip"
   }
 }
