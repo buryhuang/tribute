@@ -88,7 +88,7 @@ function Body() {
 		setIsLoading(true);
 		const response = await openai.createImage({
 			prompt: search,
-			n: 1,
+			n: 4,
 			size: "512x512",
 		});
 
@@ -98,21 +98,21 @@ function Body() {
 
 	const fetchImageInfo = async _ => {
 		try {
-			// const { data:response } = await axios({
-			// 	url: 'http://127.0.0.1:5000/process_image',
-			// 	method: 'POST',
-			// 	headers: {
-			// 		'Content-Type': 'application/json',
-			// 		'Accept': 'application/json',
-			// 		'Access-Control-Allow-Origin': window?.location?.origin || '*',
-			// 	},
-			// 	data: {
-			// 		image_url: openedImage,
-			// 	}
-			// });
+			const { data:response } = await axios({
+				url: 'http://127.0.0.1:5000/process_image',
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json',
+					'Access-Control-Allow-Origin': window?.location?.origin || '*',
+				},
+				data: {
+					image_url: openedImage,
+				}
+			});
 
 			// console.log(response);
-			// setImageInfo(response.data);
+			setImageInfo(response.data);
 			// setImageInfo([
 			// 	{
 			// 		name: 'Robert Downey Jr.',
@@ -262,7 +262,7 @@ function Body() {
 						imageInfo && imageInfo?.length
 						? imageInfo?.map((info, index) => {
 							return (
-								<div key={index} className='mt-4 px-2 bg-black bg-opacity-80 backdrop-blur-sm font-semibold text-sm text-primary-500'>
+								<div key={index} className='mt-4 px-16 bg-black bg-opacity-80 backdrop-blur-sm font-semibold text-xl text-primary-500'>
 									<h3>{info?.name} - <span className='text-white'>{info?.percentage}%</span></h3>
 								</div>
 							)
