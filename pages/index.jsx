@@ -39,9 +39,21 @@ export default function Home() {
 				maxWidth='sm:max-w-screen-md'
 				onClose={_ => setIsAboutModalVisible(false)}
 			>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione enim qui obcaecati omnis nulla aliquam id voluptatem quisquam doloremque natus, adipisci saepe debitis numquam perspiciatis harum? Quo consequatur ducimus accusantium!</p>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione enim qui obcaecati omnis nulla aliquam id voluptatem quisquam doloremque natus, adipisci saepe debitis numquam perspiciatis harum? Quo consequatur ducimus accusantium!</p>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione enim qui obcaecati omnis nulla aliquam id voluptatem quisquam doloremque natus, adipisci saepe debitis numquam perspiciatis harum? Quo consequatur ducimus accusantium!</p>
+				<p>
+					Tribute is dedicated to giving due recognition and appreciation to the talented artists whose work has been featured in AIGC arts. Our goal is to ensure that these artists receive the acknowledgement and exposure they deserve, while also providing a comprehensive database for art enthusiasts and creators to discover and engage with their work.
+				</p>
+				<br/>
+				<p>
+					As a team, we are passionate about the importance of proper attribution, and we genuinely believe that by honoring the efforts of individual artists, we are fostering a more respectful and enriched artistic community.
+				</p>
+				<br/>
+				<p>
+					Through Tribute, we hope to raise awareness about the significance of acknowledging the creative contributions of artists, ultimately making a positive impact on the industry as a whole.
+				</p>
+				<br/>
+				<p>
+					We invite you to explore the fantastic creations that are featured in AIGC arts and join us in celebrating the diverse range of exceptional talent that exists within our global community.
+				</p>
 			</Modal>
 		</>
 	);
@@ -143,7 +155,7 @@ function Body() {
 						value: amount,
 						gas: 200000,
 					};
-		
+
 					// Send the transaction using MetaMask
 					web3.eth.sendTransaction(transaction)
 					.once('transactionHash', (hash) => {
