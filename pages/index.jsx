@@ -17,8 +17,8 @@ export default function Home() {
 	const [isAboutModalVisible, setIsAboutModalVisible] = useState(false);
 
 	return (
-		<>
-			<Head>
+		<div className='min-h-screen flex flex-col'>
+		<Head>
 				<title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
 			</Head>
 
@@ -55,7 +55,14 @@ export default function Home() {
 					We invite you to explore the fantastic creations that are featured in AIGC arts and join us in celebrating the diverse range of exceptional talent that exists within our global community.
 				</p>
 			</Modal>
-		</>
+
+			{/* Footer */}
+			<footer className='max-w-screen-lg w-full mx-auto px-2 sm:px-4 py-2 sm:py-4 text-gray-800 dark:text-white absolute bottom-0'>
+				<p className='text-center'>
+					&copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_APP_NAME}. All rights reserved.
+				</p>
+			</footer>
+		</div>
 	);
 }
 
@@ -191,6 +198,7 @@ function Body() {
 				method='post'
 				className='form'
 				onSubmit={handleSearch}
+				style={{ width: "33vw" }}
 			>
 				<input
 					type="text"
