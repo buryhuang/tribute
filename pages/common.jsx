@@ -4,11 +4,11 @@ export default function AboutContent() {
   return (
     <>
       <p>
-        Art-Honors is dedicated to giving due recognition and appreciation to the
-        talented artists whose work has been featured in AI generative arts. Our goal is
-        to ensure that these artists receive the acknowledgement and exposure
-        they deserve, while also providing a comprehensive database for art
-        enthusiasts and creators to discover and engage with their work.
+        Art-Honors is dedicated to giving due recognition and appreciation to
+        the talented artists whose work has been featured in AI generative arts.
+        Our goal is to ensure that these artists receive the acknowledgement and
+        exposure they deserve, while also providing a comprehensive database for
+        art enthusiasts and creators to discover and engage with their work.
       </p>
       <br />
       <p>
@@ -25,9 +25,9 @@ export default function AboutContent() {
       </p>
       <br />
       <p>
-        We invite you to explore the fantastic creations that are featured in
-        AI generative arts and join us in celebrating the diverse range of exceptional
-        talent that exists within our global community.
+        We invite you to explore the fantastic creations that are featured in AI
+        generative arts and join us in celebrating the diverse range of
+        exceptional talent that exists within our global community.
       </p>
     </>
   );
