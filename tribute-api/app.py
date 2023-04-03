@@ -7,14 +7,14 @@ from dotenv import load_dotenv
 import boto3
 import hashlib
 from utils import get_referenced_artists
+import os
 
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-s3 = boto3.client('s3')
-
+s3 = boto3.client('s3', aws_access_key_id=os.environ.get('AWS_ACCESS_KEY_ID'), aws_secret_access_key=os.environ.get('AWS_SECRET_ACCESS_KEY'))
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
