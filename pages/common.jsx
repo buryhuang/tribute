@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export function AboutContent () {
+export default function AboutContent () {
     return (
         <>
             <p>
