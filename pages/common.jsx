@@ -5,7 +5,7 @@ export default function AboutContent() {
     <>
       <p>
         Art-Honors is dedicated to giving due recognition and appreciation to the
-        talented artists whose work has been featured in AIGC arts. Our goal is
+        talented artists whose work has been featured in AI generative arts. Our goal is
         to ensure that these artists receive the acknowledgement and exposure
         they deserve, while also providing a comprehensive database for art
         enthusiasts and creators to discover and engage with their work.
@@ -26,7 +26,7 @@ export default function AboutContent() {
       <br />
       <p>
         We invite you to explore the fantastic creations that are featured in
-        AIGC arts and join us in celebrating the diverse range of exceptional
+        AI generative arts and join us in celebrating the diverse range of exceptional
         talent that exists within our global community.
       </p>
     </>
