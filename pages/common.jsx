@@ -77,3 +77,108 @@ export async function fetchImageInfo(openedImage) {
     console.log(err);
   }
 }
+
+export function Spinner({ text }) {
+  return (
+    <div className="mx-auto text-center flex flex-col gap-y-2 justify-center items-center">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="m-0 bg-transparent block w-20 h-20 mx-auto mt-4 sm:mt-8"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="xMidYMid"
+      >
+        <rect x="19" y="19" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="40" y="19" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.125s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="61" y="19" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.25s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="19" y="40" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.875s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="61" y="40" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.375s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="19" y="61" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.75s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="40" y="61" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.625s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+        <rect x="61" y="61" width="12" height="12" fill="#84cc16">
+          <animate
+            attributeName="fill"
+            values="#4d7c0f;#84cc16;#84cc16"
+            keyTimes="0;0.125;1"
+            dur="1s"
+            repeatCount="indefinite"
+            begin="0.5s"
+            calcMode="discrete"
+          ></animate>
+        </rect>
+      </svg>
+      <h1 className="text-dark-800 dark:text-white font-semibold font-primary">
+        {text}
+      </h1>
+    </div>
+  );
+}

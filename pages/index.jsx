@@ -4,7 +4,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { Configuration, OpenAIApi } from "openai";
 import Modal from "@comps/Modal";
-import AboutContent, { fetchImageInfo, Img } from "./common";
+import AboutContent, { fetchImageInfo, Img, Spinner } from "./common";
 
 const openAiConfig = new Configuration({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -80,9 +80,13 @@ function Body() {
   useEffect(() => {
     if (openedImage === "") return;
 
+    setIsLoading(true);
+
     fetchImageInfo(openedImage).then((data) => {
       setImageInfo(data);
     });
+
+    setIsLoading(false);
   }, [openedImage]);
 
   const handleSearch = async (event) => {
@@ -157,107 +161,11 @@ function Body() {
 
       {/* Result */}
       {isLoading ? (
-        <div className="mx-auto text-center flex flex-col gap-y-2 justify-center items-center">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="m-0 bg-transparent block w-20 h-20 mx-auto mt-4 sm:mt-8"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="xMidYMid"
-          >
-            <rect x="19" y="19" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="40" y="19" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.125s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="61" y="19" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.25s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="19" y="40" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.875s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="61" y="40" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.375s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="19" y="61" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.75s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="40" y="61" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.625s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-            <rect x="61" y="61" width="12" height="12" fill="#84cc16">
-              <animate
-                attributeName="fill"
-                values="#4d7c0f;#84cc16;#84cc16"
-                keyTimes="0;0.125;1"
-                dur="1s"
-                repeatCount="indefinite"
-                begin="0.5s"
-                calcMode="discrete"
-              ></animate>
-            </rect>
-          </svg>
-          <h1 className="text-dark-800 dark:text-white font-semibold font-primary">
-            Kindly hold on for a moment while we bring your imaginative story to
-            life...
-          </h1>
-        </div>
+        <Spinner
+          text={
+            "Kindly hold on for a moment while we bring your imaginative story to life..."
+          }
+        />
       ) : result && result.data && result.data.length ? (
         <div className="mt-4 sm:mt-8 max-w-screen-lg w-full mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
           {result?.data?.map((img, index) => (
@@ -291,21 +199,25 @@ function Body() {
           />
 
           {/* Image artists */}
-          {imageInfo && imageInfo?.length
-            ? imageInfo?.map((info, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="mt-4 px-16 bg-black bg-opacity-80 backdrop-blur-sm font-semibold text-xl text-primary-500"
-                  >
-                    <h3>
-                      {info?.name} -{" "}
-                      <span className="text-white">{info?.percentage}%</span>
-                    </h3>
-                  </div>
-                );
-              })
-            : null}
+          {imageInfo && imageInfo?.length ? (
+            imageInfo?.map((info, index) => {
+              return (
+                <div
+                  key={index}
+                  className="mt-4 px-16 bg-black bg-opacity-80 backdrop-blur-sm font-semibold text-xl text-primary-500"
+                >
+                  <h3>
+                    {info?.name} -{" "}
+                    <span className="text-white">{info?.percentage}%</span>
+                  </h3>
+                </div>
+              );
+            })
+          ) : (
+            <Spinner
+              text={"Finding the honorable artists to attribute to ..."}
+            />
+          )}
         </div>
       </Modal>
     </main>
