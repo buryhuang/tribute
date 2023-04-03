@@ -118,7 +118,7 @@ function Body() {
 	const fetchImageInfo = async _ => {
 		try {
 			const { data:response } = await axios({
-				url: 'https://gtfnazi3x5.execute-api.us-east-1.amazonaws.com/process_image',
+				url: 'https://cdha7r2hmf.execute-api.us-east-1.amazonaws.com/process_image',
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
@@ -130,60 +130,7 @@ function Body() {
 				}
 			});
 
-			// console.log(response);
 			setImageInfo(response.data);
-			// setImageInfo([
-			// 	{
-			// 		name: 'Robert Downey Jr.',
-			// 		percentage: 80,
-			// 	},
-			// 	{
-			// 		name: 'Chris Evans',
-			// 		percentage: 20,
-			// 	}
-			// ])
-			// Import necessary libraries
-
-			// Connect to the OKEx blockchain using web3
-			if (window.ethereum) {
-				console.log(window.ethereum);
-				const web3 = new Web3(window.ethereum);
-				try {
-					window.ethereum.request({ method: 'eth_requestAccounts' }).then((accounts) => {
-					// User has allowed account access to MetaMask
-					console.log(accounts);
-
-					// Create a transaction object to send OKT currency
-					const recipientAddress = '0x0B057e1f7eaD6a351418181930F2328E6f5408A3'; // Replace with recipient's wallet address
-					const amount = web3.utils.toWei('10', 'wei'); // Replace with desired amount of OKT currency to send
-					const transaction = {
-						from: accounts[0], // Replace with your wallet address
-						to: recipientAddress,
-						value: amount,
-						gas: 200000,
-					};
-
-					// Send the transaction using MetaMask
-					web3.eth.sendTransaction(transaction)
-					.once('transactionHash', (hash) => {
-						console.log('Transaction hash:', hash);
-					})
-					.once('receipt', (receipt) => {
-						console.log('Transaction receipt:', receipt);
-					})
-					.on('error', (error) => {
-						console.error('Transaction error:', error);
-					});
-				  });
-				} catch (error) {
-				  // User has denied account access to MetaMask
-				}
-			  } else if (window.web3) {
-				const web3 = new Web3(window.web3.currentProvider);
-			  } else {
-				// No web3 provider detected
-			  }
-
 		} catch (err) {
 			console.log(err);
 		}

@@ -7,6 +7,15 @@
     "provider": {
       "name": "aws",
       "runtime": "python3.9",
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:PutObject"
+          ],
+          "Resource": "arn:aws:s3:::arthornors-images/*"
+        }
+      ],
       "stage": "dev",
       "region": "us-east-1",
       "versionFunctions": true,
@@ -146,6 +155,9 @@
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tribute-api-dev*:*:*"
                           }
                         ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
                       }
                     ]
                   }
@@ -220,7 +232,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tribute-api/dev/1680497096796-2023-04-03T04:44:56.796Z/tribute-api.zip"
+                "S3Key": "serverless/tribute-api/dev/1680497635242-2023-04-03T04:53:55.242Z/tribute-api.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "python3.9",
@@ -238,14 +250,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionoOp6lRuF2TYaFkQ9Gg8msE0kx9beDloMIBugK3MnYA": {
+          "ApiLambdaVersionPlII3noImiZCJyUYdeSa0ZtcryOzOO1hAAqVQrlrbco": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "5B1JbA5jqddtW8ODj9qWPHlz9DhLnTU9UzUUTDP2VTg="
+              "CodeSha256": "CLPFXZ1PDGC1ic6BUWb3EuKlRwOqiQbTS4tsFFpyhS8="
             }
           },
           "HttpApi": {
@@ -400,7 +412,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionoOp6lRuF2TYaFkQ9Gg8msE0kx9beDloMIBugK3MnYA"
+              "Ref": "ApiLambdaVersionPlII3noImiZCJyUYdeSa0ZtcryOzOO1hAAqVQrlrbco"
             },
             "Export": {
               "Name": "sls-tribute-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -556,7 +568,7 @@
         "memory": 1024,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionoOp6lRuF2TYaFkQ9Gg8msE0kx9beDloMIBugK3MnYA"
+        "versionLogicalId": "ApiLambdaVersionPlII3noImiZCJyUYdeSa0ZtcryOzOO1hAAqVQrlrbco"
       }
     },
     "configValidationMode": "warn",
@@ -590,7 +602,7 @@
     "artifact": "/Users/bury.huang/git/webapp/tribute/tribute-api/.serverless/tribute-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/tribute-api/dev/1680497096796-2023-04-03T04:44:56.796Z",
+    "artifactDirectoryName": "serverless/tribute-api/dev/1680497635242-2023-04-03T04:53:55.242Z",
     "artifact": "tribute-api.zip"
   }
 }
