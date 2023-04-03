@@ -10,9 +10,7 @@
       "iamRoleStatements": [
         {
           "Effect": "Allow",
-          "Action": [
-            "s3:PutObject"
-          ],
+          "Action": ["s3:PutObject"],
           "Resource": "arn:aws:s3:::arthornors-images/*"
         }
       ],
@@ -107,27 +105,16 @@
                   {
                     "Effect": "Allow",
                     "Principal": {
-                      "Service": [
-                        "lambda.amazonaws.com"
-                      ]
+                      "Service": ["lambda.amazonaws.com"]
                     },
-                    "Action": [
-                      "sts:AssumeRole"
-                    ]
+                    "Action": ["sts:AssumeRole"]
                   }
                 ]
               },
               "Policies": [
                 {
                   "PolicyName": {
-                    "Fn::Join": [
-                      "-",
-                      [
-                        "tribute-api",
-                        "dev",
-                        "lambda"
-                      ]
-                    ]
+                    "Fn::Join": ["-", ["tribute-api", "dev", "lambda"]]
                   },
                   "PolicyDocument": {
                     "Version": "2012-10-17",
@@ -147,9 +134,7 @@
                       },
                       {
                         "Effect": "Allow",
-                        "Action": [
-                          "logs:PutLogEvents"
-                        ],
+                        "Action": ["logs:PutLogEvents"],
                         "Resource": [
                           {
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tribute-api-dev*:*:*"
@@ -207,15 +192,10 @@
                     "Statement": [
                       {
                         "Effect": "Allow",
-                        "Action": [
-                          "logs:FilterLogEvents"
-                        ],
+                        "Action": ["logs:FilterLogEvents"],
                         "Resource": [
                           {
-                            "Fn::GetAtt": [
-                              "ApiLogGroup",
-                              "Arn"
-                            ]
+                            "Fn::GetAtt": ["ApiLogGroup", "Arn"]
                           }
                         ]
                       }
@@ -240,15 +220,10 @@
               "MemorySize": 1024,
               "Timeout": 60,
               "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["IamRoleLambdaExecution", "Arn"]
               }
             },
-            "DependsOn": [
-              "ApiLogGroup"
-            ]
+            "DependsOn": ["ApiLogGroup"]
           },
           "ApiLambdaVersionPlII3noImiZCJyUYdeSa0ZtcryOzOO1hAAqVQrlrbco": {
             "Type": "AWS::Lambda::Version",
@@ -286,10 +261,7 @@
               },
               "AccessLogSettings": {
                 "DestinationArn": {
-                  "Fn::GetAtt": [
-                    "HttpApiLogGroup",
-                    "Arn"
-                  ]
+                  "Fn::GetAtt": ["HttpApiLogGroup", "Arn"]
                 },
                 "Format": "{\"requestTime\":\"$context.requestTime\",\"requestId\":\"$context.requestId\",\"apiId\":\"$context.apiId\",\"resourcePath\":\"$context.routeKey\",\"path\":\"$context.path\",\"httpMethod\":\"$context.httpMethod\",\"stage\":\"$context.stage\",\"status\":\"$context.status\",\"integrationStatus\":\"$context.integrationStatus\",\"integrationLatency\":\"$context.integrationLatency\",\"responseLatency\":\"$context.responseLatency\",\"responseLength\":\"$context.responseLength\",\"errorMessage\":\"$context.error.message\",\"format\":\"SLS_HTTP_API_LOG\",\"version\":\"1.0.0\"}"
               }
@@ -300,10 +272,7 @@
             "Type": "AWS::Lambda::Permission",
             "Properties": {
               "FunctionName": {
-                "Fn::GetAtt": [
-                  "ApiLambdaFunction",
-                  "Arn"
-                ]
+                "Fn::GetAtt": ["ApiLambdaFunction", "Arn"]
               },
               "Action": "lambda:InvokeFunction",
               "Principal": "apigateway.amazonaws.com",
@@ -400,10 +369,7 @@
           },
           "EnterpriseLogAccessIamRole": {
             "Value": {
-              "Fn::GetAtt": [
-                "EnterpriseLogAccessIamRole",
-                "Arn"
-              ]
+              "Fn::GetAtt": ["EnterpriseLogAccessIamRole", "Arn"]
             },
             "Export": {
               "Name": "sls-tribute-api-dev-EnterpriseLogAccessIamRole"
@@ -548,10 +514,7 @@
         "app": "app.app"
       }
     },
-    "plugins": [
-      "serverless-wsgi",
-      "serverless-python-requirements"
-    ],
+    "plugins": ["serverless-wsgi", "serverless-python-requirements"],
     "pluginsData": {},
     "functions": {
       "api": {

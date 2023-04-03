@@ -1,4 +1,5 @@
 # System
+
 You are a senior blockchain developer to create solidity smart contract given a specification.
 
 - Describe general use case
@@ -6,13 +7,15 @@ You are a senior blockchain developer to create solidity smart contract given a 
 - Output a ethereum smart contract written in solidity
 
 # ZK Circuit Spec
+
 Here is the spec for a smart contract and circuit created by halo2, used to to validate the list of artist referenced by a AI generated image using zero-knowledge proof
+
 - The circuit will intake a list of artists and a A.I. model
 - The circuit will create a zero knowledge proof with any given image
 - The circuit will create an smart contract to be execute on Ethereum to validate any given image with raw bytes
 
-
 ## General Smart Contract
+
 General Use Case:
 
 The smart contract and circuit created using Halo2 will be used to validate the list of artists referenced by an AI-generated image using zero-knowledge proof. This will be helpful in ensuring that the model used to generate the image is not biased towards certain artists or genres of art. By validating the list of artists, we can ensure a fair and unbiased approach to AI-generated art.
@@ -20,12 +23,14 @@ The smart contract and circuit created using Halo2 will be used to validate the 
 Interface and Acceptance Criteria:
 
 The smart contract and circuit will take in two inputs:
+
 - A list of artists
 - An AI model
 
 The circuit will create a zero-knowledge proof with any given image and create a smart contract to be executed on Ethereum to validate any given image with raw bytes.
 
 The acceptance criteria for the smart contract and circuit are as follows:
+
 - The circuit should be able to validate the list of artists referenced by an AI-generated image using zero-knowledge proof.
 - The smart contract should be able to execute on Ethereum to validate any given image with raw bytes.
 - The smart contract should be secure and free from vulnerabilities.
@@ -67,8 +72,8 @@ The `isValidationComplete` function checks if all artists in the list have valid
 
 Note that this implementation is just an example and may need to be modified based on the specific requirements of the use case.
 
-
 ## The Halo2 Circuit
+
 Create the circuit using ZK framework Halo2
 
 To create the circuit using ZK framework Halo2, we first need to define the constraints and variables involved in the validation process. Here is an example of how we can define the circuit:
@@ -149,8 +154,8 @@ In this implementation, we define the `ArtistValidationCircuit` struct which con
 
 Note that this implementation is just an example and may need to be modified based on the specific requirements of the use case. Also, this circuit should be combined with a proof system, such as PLONK, to create a zero-knowledge proof.
 
-
 ## Creating the proof
+
 Create the halo2 commands to create proof and solidity smart contract
 
 To create a proof using Halo2, we need to first create an instance of the circuit and then generate a proof using a transcript. Here is an example of how we can create the proof:

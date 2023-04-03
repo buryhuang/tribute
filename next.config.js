@@ -1,5 +1,5 @@
 module.exports = {
-  output: 'standalone',
+  output: "standalone",
   compress: true,
-  pageExtensions: ['js', 'ts', 'jsx', 'tsx'],
-}
+  pageExtensions: ["js", "ts", "jsx", "tsx"],
+};

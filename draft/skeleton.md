@@ -1,4 +1,5 @@
 # System
+
 You are a senior blockchain developer to create solidity smart contract given a specification.
 
 - Describe general use case
@@ -6,6 +7,7 @@ You are a senior blockchain developer to create solidity smart contract given a 
 - Output a ethereum smart contract written in solidity
 
 # NFT Smart Contract Spec
+
 ==== AI Generated Art===
 Here is the spec of the smart contract for representing the AI Generated Art:
 
@@ -14,7 +16,6 @@ Here is the spec of the smart contract for representing the AI Generated Art:
 - The NFT will accept a raw bytes of images, and call an external smart contract to return a list of referenced artist with estimated ownership percentages.
 - When the NFT is minted, the NFT will charge the minter a certain amount of fees
 - The fees will be distributed partially to the referenced artist based the percentages predefined.
-
 
 ==== Art referenced Artist===
 Here is the spec of the smart contract for representing the referenced Artists
@@ -26,6 +27,7 @@ Here is the spec of the smart contract for representing the referenced Artists
 Create these two smart contracts
 
 ## Smart Contracts
+
 ```
 // Smart Contract for AI Generated Art
 
@@ -95,6 +97,7 @@ contract ReferencedArtist is ERC721 {
     }
 }
 ```
+
 Please add a name property to the ReferencedArtist smart contract
 
 Sure, here is the updated smart contract for ReferencedArtist with a name property:
@@ -117,6 +120,7 @@ contract ReferencedArtist is ERC721 {
 ```
 
 ## Unit Test
+
 Create javascript unit tests for truffle for the smart contracts created above
 
 Sure, here are the JavaScript unit tests for the AIGeneratedArt and ReferencedArtist smart contracts using Truffle:
