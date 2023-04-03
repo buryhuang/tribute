@@ -72,7 +72,8 @@ function Header({ openAboutModal }) {
 }
 
 function Body() {
-	const [search, setSearch] = useState('man calling taxi in Newyork street, oil painting');
+	const [imageUrl, setImageUrl] = useState('');
+	const [searchText, setSearchText] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 	const [result, setResult] = useState([]);
 	const [openedImage, setOpenedImage] = useState('');
@@ -89,18 +90,36 @@ function Body() {
 	const handleSearch = async (event) => {
 		event.preventDefault();
 
-		if(search.trim() === '') return;
+		if(searchText.trim() === '' && imageUrl.trim() === '') return;
 
 		setIsLoading(true);
-		const response = await openai.createImage({
-			prompt: search,
-			n: 4,
-			size: "512x512",
-		});
+		if (searchText.trim()) {
+			const response = await openai.createImage({
+				prompt: searchText,
+				n: 4,
+				size: "512x512",
+			});
 
-		setResult(response.data);
+			setResult(response.data);
+		} else if (imageUrl.trim()) {
+			setResult({data: [{url: imageUrl}]});
+		}
 		setIsLoading(false);
 	}
+
+	const handleInputChange = (event) => {
+		const input = event.target.value;
+
+		// check if input is a valid URL
+		const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+		if (urlRegex.test(input)) {
+			setImageUrl(input);
+			setSearchText('');
+		} else {
+			setSearchText(input);
+			setImageUrl('');
+		}
+	};
 
 	return (
 		<main className='max-w-screen-lg mx-auto px-2 sm:px-4 py-6 sm:py-20'>
@@ -115,11 +134,10 @@ function Body() {
 			>
 				<input
 					type="text"
-					placeholder='Describe the amazing story that you have in your mind right now'
+					placeholder='Enter a prompt, keywords, or an image URL'
 					autoComplete='off'
 					className='search-bar'
-					defaultValue={search}
-					onChange={({ target }) => setSearch(target.value)}
+					onChange={(event) => handleInputChange(event)}
 				/>
 
 				<button
