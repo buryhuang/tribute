@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { Configuration, OpenAIApi } from "openai";
 import Modal from '@comps/Modal';
-import {AboutContent, fetchImageInfo, Img} from "./common";
+import AboutContent, {fetchImageInfo, Img} from "./common";
 
 const openAiConfig = new Configuration({
 	apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
