@@ -4,6 +4,8 @@ service: tribute-api
 
 frameworkVersion: '3'
 
+useDotenv: true
+
 custom:
   wsgi:
     app: app.app

@@ -1,51 +1,20 @@
-#from flask import Flask, jsonify, make_response
-
-# app = Flask(__name__)
-
-
-# @app.route("/")
-# def hello_from_root():
-#     return jsonify(message='Hello from root!')
-
-
-# @app.route("/hello")
-# def hello():
-#     return jsonify(message='Hello from path!')
-
-
-# @app.errorhandler(404)
-# def resource_not_found(e):
-#     return make_response(jsonify(error='Not found!'), 404)
-
 import requests
 from flask import Flask, request, jsonify
 from base64 import b64encode
 from flask_cors import CORS
 import re
+from dotenv import load_dotenv
+import boto3
+import hashlib
+from utils import get_referenced_artists
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
+s3 = boto3.client('s3')
 
-def get_referenced_artists(image_text):
-    # Search for all occurrences of the phrase "inspired by" and extract the artist names
-    pattern = r"inspired by (\w+(?: \w+)*)"
-    matches = re.findall(pattern, image_text)
-    if matches:
-        print(matches)
-        results = []
-        initial_percent = 45
-        factor = 0.35
-        for match in matches:
-            results.append({
-                'name': match,
-                'percentage': initial_percent
-            })
-            initial_percent = initial_percent * factor
-        print(results)
-        return results
-    else:
-        return None
 
 @app.route('/process_image', methods=['POST'])
 def process_image():
@@ -58,6 +27,12 @@ def process_image():
         response = requests.get(image_url)
         response.raise_for_status()
         image_bytes = response.content
+
+        # Generate sha256 hash of the image
+        image_hash = hashlib.sha256(image_bytes).hexdigest()
+
+        # Save the image to s3 bucket
+        s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
 
         # Send the raw image bytes to Huggingface API
         huggingface_response = requests.post("https://fffiloni-clip-interrogator-2.hf.space/run/clipi2", json={
@@ -72,25 +47,6 @@ def process_image():
         output_data = huggingface_response.get('data')
         if not output_data:
             return jsonify({'error': 'no output data from Huggingface API'}), 500
-
-        # Example data
-        # {
-        #     "data": [
-        #         "a painting of a taxi cab on a city street, inspired by Ken Howard, trending on cg society, american scene painting, hands raised, ny, waving, full width",
-        #         {
-        #             "__type__": "update",
-        #             "visible": true
-        #         },
-        #         {
-        #             "__type__": "update",
-        #             "visible": true
-        #         },
-        #         {
-        #             "__type__": "update",
-        #             "visible": true
-        #         }
-        #     ]
-        # }
 
         print(output_data)
         # Return the referenced artists
