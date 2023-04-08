@@ -15,7 +15,7 @@ export default function Home() {
   const [isAboutModalVisible, setIsAboutModalVisible] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="bg-white min-h-screen flex flex-col">
       <Head>
         <title>{process.env.NEXT_PUBLIC_APP_NAME}</title>
       </Head>
@@ -39,7 +39,7 @@ export default function Home() {
       </Modal>
 
       {/* Footer */}
-      <footer className="max-w-screen-lg w-full mx-auto px-2 sm:px-4 py-2 sm:py-4 text-gray-800 dark:text-white absolute bottom-0">
+      <footer className="max-w-screen-lg w-full mx-auto px-2 sm:px-4 py-2 sm:py-4 text-gray-800 dark:text-black absolute bottom-0">
         <p className="text-center">
           &copy; {new Date().getFullYear()} {process.env.NEXT_PUBLIC_APP_NAME}.
           All rights reserved.
@@ -51,7 +51,7 @@ export default function Home() {
 
 function Header({ openAboutModal }) {
   return (
-    <header className="max-w-screen-lg w-full mx-auto relative px-2 sm:px-4 py-2 sm:py-4 text-gray-800 dark:text-white">
+    <header className="max-w-screen-lg w-full mx-auto relative px-2 sm:px-4 py-2 sm:py-4 text-gray-800 dark:text-black">
       <div className="flex flex-row justify-between items-center">
         <Link href="/" className="font-primary text-lg font-bold">
           {process.env.NEXT_PUBLIC_APP_NAME}

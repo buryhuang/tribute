@@ -19,10 +19,10 @@ export default function Modal(props) {
       } inset-0 z-40 bg-gray-800 bg-opacity-70 flex flex-row sm:justify-center sm:items-center`}
     >
       <div
-        className={`max-w-none ${maxWidth} w-full bg-gray-50 dark:bg-[#010911] sm:rounded sm:m-4`}
+        className={`max-w-none ${maxWidth} w-full bg-gray-50 sm:rounded sm:m-4`}
       >
         {/* Header */}
-        <div className="flex flex-row items-center sm:justify-between gap-5 sm:gap-3 text-gray-700 dark:text-gray-200 px-2 sm:px-4 py-2 sm:py-4 border-b-2 border-gray-200 dark:border-gray-800">
+        <div className="flex flex-row items-center sm:justify-between gap-5 sm:gap-3 text-gray-700 dark:text-gray-200 px-2 sm:px-4 py-2 sm:py-4 border-b-2 bg-white border-gray-200 dark:border-gray-800">
           {/* Close Button for Mobile */}
           <span
             className={`${
@@ -47,7 +47,7 @@ export default function Modal(props) {
           </span>
 
           {/* Title */}
-          <h1 className="text-lg truncate font-semibold">{title}</h1>
+          <h1 className="text-lg truncate font-semibold text-black">{title}</h1>
 
           {/* Close Button for Desktop */}
           <span
@@ -58,7 +58,7 @@ export default function Modal(props) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 text-black"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -77,7 +77,7 @@ export default function Modal(props) {
         <div
           className={`${
             isLoading ? "hidden" : ""
-          } my-2 px-3 py-2 text-gray-800 dark:text-white`}
+          } my-2 px-3 py-2 text-gray-800 dark:text-black bg-white`}
         >
           {children}
         </div>

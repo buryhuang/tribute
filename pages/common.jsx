@@ -176,7 +176,7 @@ export function Spinner({ text }) {
           ></animate>
         </rect>
       </svg>
-      <h1 className="text-dark-800 dark:text-white font-semibold font-primary">
+      <h1 className="text-dark-800 dark:text-black font-semibold font-primary">
         {text}
       </h1>
     </div>
