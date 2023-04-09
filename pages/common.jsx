@@ -4,9 +4,9 @@ export default function AboutContent() {
   return (
     <>
       <p>
-        Art-Honors is dedicated to giving due recognition and appreciation to
-        the talented artists whose work has been featured in AI generative arts.
-        Our goal is to ensure that these artists receive the acknowledgement and
+        Tribute is dedicated to giving due recognition and appreciation to the
+        talented artists whose work has been featured in AI generative arts. Our
+        goal is to ensure that these artists receive the acknowledgement and
         exposure they deserve, while also providing a comprehensive database for
         art enthusiasts and creators to discover and engage with their work.
       </p>
@@ -19,7 +19,7 @@ export default function AboutContent() {
       </p>
       <br />
       <p>
-        Through Art-Honors, we hope to raise awareness about the significance of
+        Through Tribute, we hope to raise awareness about the significance of
         acknowledging the creative contributions of artists, ultimately making a
         positive impact on the industry as a whole.
       </p>
