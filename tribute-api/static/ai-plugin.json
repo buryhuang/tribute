@@ -1,9 +1,9 @@
 {
     "schema_version": "v1",
-    "name_for_human": "Tribute Image Attribution Plugin",
+    "name_for_human": "Tribute Image Attribution",
     "name_for_model": "tribute",
-    "description_for_human": "Plugin for attributing referenced artists in AI-generated art. Process images to extract artist information and ensure fair compensation.",
-    "description_for_model": "This plugin processes images of AI-generated art to identify and attribute referenced artists. It extracts artist information from the image and interfaces with a smart contract-based platform to ensure appropriate compensation for contributing artists.",
+    "description_for_human": "Plugin to attribute artists in AI-generated art. Processes images, extracts artist info, and ensures fair compensation.",
+    "description_for_model": "This plugin processes images of any arts including AI-generated art, to identify and attribute referenced artists. It extracts artist information from the image and interfaces with a smart contract-based platform to ensure appropriate compensation for contributing artists.",
     "auth": {
         "type": "none"
     },

@@ -4,58 +4,11 @@ info:
   description: REST API to process images and extract referenced artists
   version: 1.0.0
 servers:
-  - url: http://localhost:5000
+  - url: https://cdha7r2hmf.execute-api.us-east-1.amazonaws.com
 paths:
-  /process_image:
-    post:
-      summary: Process an image from the provided URL
-      requestBody:
-        description: JSON object with image URL
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                image_url:
-                  type: string
-      responses:
-        '200':
-          description: Successfully processed the image and extracted referenced artists
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        percentage:
-                          type: integer
-        '400':
-          description: Missing image URL in the request
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
-        '500':
-          description: Error processing the image or no output data from Huggingface API
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  error:
-                    type: string
   /process_image_url:
     get:
+      operationId: process_image_url
       summary: Process an image from the provided URL
       parameters:
         - name: image_url
