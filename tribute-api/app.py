@@ -16,24 +16,8 @@ CORS(app)
 s3 = boto3.client('s3')
 
 
-@app.route('/.well-known/<path:filename>')
-def well_known(filename):
-    print(filename)
-    return send_from_directory('static', filename)
-
-
-@app.route('/process_image', methods=['POST'])
-def process_image():
-    data = request.json
-    image_url = data.get('image_url')
-    if not image_url:
-        return jsonify({'error': 'image_url not provided'}), 400
+def process_image(image_bytes):
     try:
-        # Download image raw bytes from the provided image url
-        response = requests.get(image_url)
-        response.raise_for_status()
-        image_bytes = response.content
-
         # Generate sha256 hash of the image
         image_hash = hashlib.sha256(image_bytes).hexdigest()
 
@@ -60,6 +44,49 @@ def process_image():
 
     except requests.exceptions.HTTPError as e:
         return jsonify({'error': str(e)}), e.response.status_code
+
+
+@app.route('/process_image', methods=['POST'])
+def process_image_api():
+    data = request.json
+    image_url = data.get('image_url')
+    if not image_url:
+        return jsonify({'error': 'image_url not provided'}), 400
+    try:
+        # Download image raw bytes from the provided image url
+        response = requests.get(image_url)
+        response.raise_for_status()
+        image_bytes = response.content
+
+        return process_image(image_bytes)
+
+    except requests.exceptions.HTTPError as e:
+        return jsonify({'error': str(e)}), e.response.status_code
+
+
+@app.route('/process_image_url', methods=['GET'])
+def process_image_url_api():
+    image_url = request.args.get('image_url')
+    if not image_url:
+        return jsonify({'error': 'image_url not provided'}), 400
+    try:
+        # Download image raw bytes from the provided image url
+        response = requests.get(image_url)
+        response.raise_for_status()
+        image_bytes = response.content
+
+        return process_image(image_bytes)
+
+    except requests.exceptions.HTTPError as e:
+        return jsonify({'error': str(e)}), e.response.status_code
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    print(f"Request path: {path}")
+    print(f"Request body: {request.json}")
+    return jsonify({'error': 'undefined route'}), 404
 
 
 if __name__ == '__main__':
