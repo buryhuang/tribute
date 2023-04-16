@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: Tribute Image Attribution API
+  description: REST API to process images and extract referenced artists
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /process_image:
+    post:
+      summary: Process an image from the provided URL
+      requestBody:
+        description: JSON object with image URL
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                image_url:
+                  type: string
+      responses:
+        '200':
+          description: Successfully processed the image and extracted referenced artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Missing image URL in the request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error processing the image or no output data from Huggingface API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /process_image_url:
+    get:
+      summary: Process an image from the provided URL
+      parameters:
+        - name: image_url
+          in: query
+          description: URL of the image to be processed
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully processed the image and extracted referenced artists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: string
+        '400':
+          description: Missing image URL in the request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Error processing the image or no output data from Huggingface API
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string

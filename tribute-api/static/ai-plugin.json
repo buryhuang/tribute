@@ -1,0 +1,18 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "Tribute Image Attribution Plugin",
+    "name_for_model": "tribute",
+    "description_for_human": "Plugin for attributing referenced artists in AI-generated art. Process images to extract artist information and ensure fair compensation.",
+    "description_for_model": "This plugin processes images of AI-generated art to identify and attribute referenced artists. It extracts artist information from the image and interfaces with a smart contract-based platform to ensure appropriate compensation for contributing artists.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "https://cdha7r2hmf.execute-api.us-east-1.amazonaws.com/.well-known/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://github.com/buryhuang/gpt4-image-inputs/raw/main/tribute_logo.png",
+    "contact_email": "admin@art-tribute.org",
+    "legal_info_url": "https://github.com/buryhuang/tribute/blob/main/tribute_privacy.md"
+}
