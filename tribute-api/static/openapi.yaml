@@ -30,7 +30,12 @@ paths:
                   data:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        percentage:
+                          type: integer
         '400':
           description: Missing image URL in the request
           content:
@@ -70,7 +75,12 @@ paths:
                   data:
                     type: array
                     items:
-                      type: string
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        percentage:
+                          type: integer
         '400':
           description: Missing image URL in the request
           content:
