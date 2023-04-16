@@ -10,6 +10,7 @@ markupsafe = "==2.0.1"
 requests = "==2.27.1"
 flask-cors = "==3.0.10"
 python-dotenv = "*"
+boto3 = "*"
 
 [dev-packages]
 

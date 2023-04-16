@@ -86,16 +86,27 @@
             {
               "Effect": "Allow",
               "Principal": {
-                "Service": ["lambda.amazonaws.com"]
+                "Service": [
+                  "lambda.amazonaws.com"
+                ]
               },
-              "Action": ["sts:AssumeRole"]
+              "Action": [
+                "sts:AssumeRole"
+              ]
             }
           ]
         },
         "Policies": [
           {
             "PolicyName": {
-              "Fn::Join": ["-", ["tribute-api", "dev", "lambda"]]
+              "Fn::Join": [
+                "-",
+                [
+                  "tribute-api",
+                  "dev",
+                  "lambda"
+                ]
+              ]
             },
             "PolicyDocument": {
               "Version": "2012-10-17",
@@ -104,8 +115,7 @@
                   "Effect": "Allow",
                   "Action": [
                     "logs:CreateLogStream",
-                    "logs:CreateLogGroup",
-                    "logs:TagResource"
+                    "logs:CreateLogGroup"
                   ],
                   "Resource": [
                     {
@@ -115,7 +125,9 @@
                 },
                 {
                   "Effect": "Allow",
-                  "Action": ["logs:PutLogEvents"],
+                  "Action": [
+                    "logs:PutLogEvents"
+                  ],
                   "Resource": [
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tribute-api-dev*:*:*"
@@ -124,7 +136,9 @@
                 },
                 {
                   "Effect": "Allow",
-                  "Action": ["s3:PutObject"],
+                  "Action": [
+                    "s3:PutObject"
+                  ],
                   "Resource": "arn:aws:s3:::arthornors-images/*"
                 }
               ]
@@ -175,10 +189,15 @@
               "Statement": [
                 {
                   "Effect": "Allow",
-                  "Action": ["logs:FilterLogEvents"],
+                  "Action": [
+                    "logs:FilterLogEvents"
+                  ],
                   "Resource": [
                     {
-                      "Fn::GetAtt": ["ApiLogGroup", "Arn"]
+                      "Fn::GetAtt": [
+                        "ApiLogGroup",
+                        "Arn"
+                      ]
                     }
                   ]
                 }
@@ -195,7 +214,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tribute-api/dev/1680497635242-2023-04-03T04:53:55.242Z/tribute-api.zip"
+          "S3Key": "serverless/tribute-api/dev/1681666557083-2023-04-16T17:35:57.083Z/tribute-api.zip"
         },
         "Handler": "s_api.handler",
         "Runtime": "python3.9",
@@ -203,19 +222,24 @@
         "MemorySize": 1024,
         "Timeout": 60,
         "Role": {
-          "Fn::GetAtt": ["IamRoleLambdaExecution", "Arn"]
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
         }
       },
-      "DependsOn": ["ApiLogGroup"]
+      "DependsOn": [
+        "ApiLogGroup"
+      ]
     },
-    "ApiLambdaVersionPlII3noImiZCJyUYdeSa0ZtcryOzOO1hAAqVQrlrbco": {
+    "ApiLambdaVersion1LvltfAmxyAganLvHpllimgBkQc3hhDdiLdTSLiHhM": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "CLPFXZ1PDGC1ic6BUWb3EuKlRwOqiQbTS4tsFFpyhS8="
+        "CodeSha256": "XHx9GQ8s1JGulxvYP7Ca+gVO8T+zdDkYrRi/haQiKDg="
       }
     },
     "HttpApi": {
@@ -244,7 +268,10 @@
         },
         "AccessLogSettings": {
           "DestinationArn": {
-            "Fn::GetAtt": ["HttpApiLogGroup", "Arn"]
+            "Fn::GetAtt": [
+              "HttpApiLogGroup",
+              "Arn"
+            ]
           },
           "Format": "{\"requestTime\":\"$context.requestTime\",\"requestId\":\"$context.requestId\",\"apiId\":\"$context.apiId\",\"resourcePath\":\"$context.routeKey\",\"path\":\"$context.path\",\"httpMethod\":\"$context.httpMethod\",\"stage\":\"$context.stage\",\"status\":\"$context.status\",\"integrationStatus\":\"$context.integrationStatus\",\"integrationLatency\":\"$context.integrationLatency\",\"responseLatency\":\"$context.responseLatency\",\"responseLength\":\"$context.responseLength\",\"errorMessage\":\"$context.error.message\",\"format\":\"SLS_HTTP_API_LOG\",\"version\":\"1.0.0\"}"
         }
@@ -255,7 +282,10 @@
       "Type": "AWS::Lambda::Permission",
       "Properties": {
         "FunctionName": {
-          "Fn::GetAtt": ["ApiLambdaFunction", "Arn"]
+          "Fn::GetAtt": [
+            "ApiLambdaFunction",
+            "Arn"
+          ]
         },
         "Action": "lambda:InvokeFunction",
         "Principal": "apigateway.amazonaws.com",
@@ -293,10 +323,13 @@
         },
         "IntegrationType": "AWS_PROXY",
         "IntegrationUri": {
-          "Fn::GetAtt": ["ApiLambdaFunction", "Arn"]
+          "Fn::GetAtt": [
+            "ApiLambdaFunction",
+            "Arn"
+          ]
         },
         "PayloadFormatVersion": "2.0",
-        "TimeoutInMillis": 30000
+        "TimeoutInMillis": 29000
       }
     },
     "HttpApiRouteDefault": {
@@ -352,7 +385,10 @@
     },
     "EnterpriseLogAccessIamRole": {
       "Value": {
-        "Fn::GetAtt": ["EnterpriseLogAccessIamRole", "Arn"]
+        "Fn::GetAtt": [
+          "EnterpriseLogAccessIamRole",
+          "Arn"
+        ]
       },
       "Export": {
         "Name": "sls-tribute-api-dev-EnterpriseLogAccessIamRole"
@@ -361,7 +397,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionPlII3noImiZCJyUYdeSa0ZtcryOzOO1hAAqVQrlrbco"
+        "Ref": "ApiLambdaVersion1LvltfAmxyAganLvHpllimgBkQc3hhDdiLdTSLiHhM"
       },
       "Export": {
         "Name": "sls-tribute-api-dev-ApiLambdaFunctionQualifiedArn"

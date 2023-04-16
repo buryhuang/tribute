@@ -2,7 +2,7 @@ org: buryhuang
 app: tribute-api
 service: tribute-api
 
-frameworkVersion: '3'
+frameworkVersion: '2'
 
 useDotenv: true
 

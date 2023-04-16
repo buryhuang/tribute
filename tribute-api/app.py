@@ -1,5 +1,5 @@
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from base64 import b64encode
 from flask_cors import CORS
 import re
@@ -14,6 +14,12 @@ app = Flask(__name__)
 CORS(app)
 
 s3 = boto3.client('s3')
+
+
+@app.route('/.well-known/<path:filename>')
+def well_known(filename):
+    print(filename)
+    return send_from_directory('static', filename)
 
 
 @app.route('/process_image', methods=['POST'])
