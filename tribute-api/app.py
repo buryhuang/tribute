@@ -16,6 +16,12 @@ CORS(app)
 s3 = boto3.client('s3')
 
 
+@app.route('/.well-known/<path:filename>')
+def well_known(filename):
+    print(filename)
+    return send_from_directory('static', filename)
+
+
 def process_image(image_bytes):
     try:
         # Generate sha256 hash of the image

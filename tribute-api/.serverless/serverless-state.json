@@ -231,7 +231,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tribute-api/dev/1681666557083-2023-04-16T17:35:57.083Z/tribute-api.zip"
+                "S3Key": "serverless/tribute-api/dev/1681671830664-2023-04-16T19:03:50.664Z/tribute-api.zip"
               },
               "Handler": "s_api.handler",
               "Runtime": "python3.9",
@@ -249,14 +249,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersion1LvltfAmxyAganLvHpllimgBkQc3hhDdiLdTSLiHhM": {
+          "ApiLambdaVersionGZxqB1h1oSGkCqak22ggrbe2xxsTtWfI9gYDcdAt2A": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "XHx9GQ8s1JGulxvYP7Ca+gVO8T+zdDkYrRi/haQiKDg="
+              "CodeSha256": "KzI2DcTPt3353Wg3akXT/uv8HVizwySad9E8z/l7Wpg="
             }
           },
           "HttpApi": {
@@ -411,7 +411,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersion1LvltfAmxyAganLvHpllimgBkQc3hhDdiLdTSLiHhM"
+              "Ref": "ApiLambdaVersionGZxqB1h1oSGkCqak22ggrbe2xxsTtWfI9gYDcdAt2A"
             },
             "Export": {
               "Name": "sls-tribute-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -567,7 +567,7 @@
         "memory": 1024,
         "runtime": "python3.9",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersion1LvltfAmxyAganLvHpllimgBkQc3hhDdiLdTSLiHhM"
+        "versionLogicalId": "ApiLambdaVersionGZxqB1h1oSGkCqak22ggrbe2xxsTtWfI9gYDcdAt2A"
       }
     },
     "configValidationMode": "warn",
@@ -578,7 +578,6 @@
       "service": {
         "$ref": "$[\"service\"][\"serviceObject\"]"
       },
-      "frameworkVersion": "2",
       "useDotenv": true,
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -603,7 +602,7 @@
     "artifact": "/Users/bury.huang/git/webapp/tribute/tribute-api/.serverless/tribute-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/tribute-api/dev/1681666557083-2023-04-16T17:35:57.083Z",
+    "artifactDirectoryName": "serverless/tribute-api/dev/1681671830664-2023-04-16T19:03:50.664Z",
     "artifact": "tribute-api.zip"
   }
 }
