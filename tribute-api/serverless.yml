@@ -22,7 +22,7 @@ provider:
 functions:
   api:
     handler: wsgi_handler.handler
-    timeout: 60
+    timeout: 120
     events:
       - httpApi: '*'
 
