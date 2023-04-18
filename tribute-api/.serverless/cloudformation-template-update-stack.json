@@ -115,7 +115,8 @@
                   "Effect": "Allow",
                   "Action": [
                     "logs:CreateLogStream",
-                    "logs:CreateLogGroup"
+                    "logs:CreateLogGroup",
+                    "logs:TagResource"
                   ],
                   "Resource": [
                     {
@@ -214,7 +215,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tribute-api/dev/1681674317769-2023-04-16T19:45:17.769Z/tribute-api.zip"
+          "S3Key": "serverless/tribute-api/dev/1681797343871-2023-04-18T05:55:43.871Z/tribute-api.zip"
         },
         "Handler": "s_api.handler",
         "Runtime": "python3.9",
@@ -232,14 +233,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionv71fEy4Gy0beS99vFbBT1x3xVPk5bfRaGal0UrBj7nE": {
+    "ApiLambdaVersionSU4bMRMY4ndudvqStdUGhm2h1p2YQ402QLa2claprN0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "0jSl8vQurQdkgJ2d39IOeW9GInHwGJHdQ59w5P5tYeM="
+        "CodeSha256": "WmV8v2CuV8E6axFLrSsbVtx4ZHDgnYOhyf/ayMzA9p0="
       }
     },
     "HttpApi": {
@@ -329,7 +330,7 @@
           ]
         },
         "PayloadFormatVersion": "2.0",
-        "TimeoutInMillis": 29000
+        "TimeoutInMillis": 30000
       }
     },
     "HttpApiRouteDefault": {
@@ -397,7 +398,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionv71fEy4Gy0beS99vFbBT1x3xVPk5bfRaGal0UrBj7nE"
+        "Ref": "ApiLambdaVersionSU4bMRMY4ndudvqStdUGhm2h1p2YQ402QLa2claprN0"
       },
       "Export": {
         "Name": "sls-tribute-api-dev-ApiLambdaFunctionQualifiedArn"

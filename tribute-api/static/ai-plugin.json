@@ -1,8 +1,8 @@
 {
     "schema_version": "v1",
-    "name_for_human": "Tribute Image Attribution",
+    "name_for_human": "Tribute",
     "name_for_model": "tribute",
-    "description_for_human": "Plugin to attribute artists in AI-generated art. Processes images, extracts artist info, and ensures fair compensation.",
+    "description_for_human": "Locate and attribute artists in AI-generated art. Processes images, extracts artist info, and ensures fair compensation.",
     "description_for_model": "This plugin processes images of any arts including AI-generated art, to identify and attribute referenced artists. It extracts artist information from the image and interfaces with a smart contract-based platform to ensure appropriate compensation for contributing artists.",
     "auth": {
         "type": "none"
@@ -12,7 +12,7 @@
         "url": "https://cdha7r2hmf.execute-api.us-east-1.amazonaws.com/.well-known/openapi.yaml",
         "is_user_authenticated": false
     },
-    "logo_url": "https://github.com/buryhuang/gpt4-image-inputs/raw/main/tribute_logo.png",
+    "logo_url": "https://github.com/buryhuang/gpt4-image-inputs/raw/main/trubute_icon_only.png",
     "contact_email": "admin@art-tribute.org",
     "legal_info_url": "https://github.com/buryhuang/tribute/blob/main/tribute_privacy.md"
 }
