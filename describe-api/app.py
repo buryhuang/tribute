@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import boto3
 import hashlib
 from utils import get_referenced_artists
+from PIL import Image
+
 
 load_dotenv()
 
@@ -63,8 +65,8 @@ config.blip_num_beams = 64
 ci = Interrogator(config)
 
 
-def inference(image, mode, best_max_flavors):
-    image = image.convert('RGB')
+def inference(image_bytes, mode, best_max_flavors):
+    image = Image.open(image_bytes).convert('RGB')  # open image with PIL and convert to RGB
     if mode == 'best':
         prompt_result = ci.interrogate(image, max_flavors=int(best_max_flavors))
         print("mode best: " + prompt_result)
