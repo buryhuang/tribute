@@ -91,7 +91,7 @@ def process_image(image_bytes):
         s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
 
         # Send the raw image bytes to Huggingface API
-        prompt, gr1, gr2, gr3  = inference(image_bytes, 'best', 4)
+        prompt, gr1, gr2, gr3  = inference(image_bytes, 'classic', 4)
 
         print(prompt, gr1, gr2, gr3)
         # Return the referenced artists
