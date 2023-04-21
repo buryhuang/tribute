@@ -8,6 +8,7 @@ import boto3
 import hashlib
 from utils import get_referenced_artists
 from PIL import Image
+import io 
 
 
 load_dotenv()
@@ -66,7 +67,8 @@ ci = Interrogator(config)
 
 
 def inference(image_bytes, mode, best_max_flavors):
-    image = Image.open(image_bytes).convert('RGB')  # open image with PIL and convert to RGB
+    stream = io.BytesIO(image_bytes)
+    image = Image.open(stream).convert('RGB')  # open image with PIL and convert to RGB
     if mode == 'best':
         prompt_result = ci.interrogate(image, max_flavors=int(best_max_flavors))
         print("mode best: " + prompt_result)
@@ -89,7 +91,7 @@ def process_image(image_bytes):
         s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
 
         # Send the raw image bytes to Huggingface API
-        (prompt,) = inference(image_bytes, 'best', 5)
+        prompt, _, _, _  = inference(image_bytes, 'best', 5)
 
         print(prompt)
         # Return the referenced artists
