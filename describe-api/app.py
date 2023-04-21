@@ -56,7 +56,7 @@ sys.path.append('clip-interrogator')
 import gradio as gr
 from clip_interrogator import Config, Interrogator
 
-config = Config()
+config = Config(clip_model_name="ViT-H-14/laion2b_s32b_b79k")
 config.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 config.blip_offload = False if torch.cuda.is_available() else True
 config.chunk_size = 2048
@@ -91,9 +91,9 @@ def process_image(image_bytes):
         s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
 
         # Send the raw image bytes to Huggingface API
-        prompt, _, _, _  = inference(image_bytes, 'best', 5)
+        prompt, gr1, gr2, gr3  = inference(image_bytes, 'best', 4)
 
-        print(prompt)
+        print(prompt, gr1, gr2, gr3)
         # Return the referenced artists
         return jsonify({'data': get_referenced_artists(prompt)}), 200
 
