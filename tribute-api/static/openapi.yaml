@@ -26,12 +26,17 @@ paths:
                 type: object
                 properties:
                   data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
+                    type: object
+                    properties:
+                      artists:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                      prompt:
+                        type: string
         '400':
           description: Missing image URL in the request
           content:
