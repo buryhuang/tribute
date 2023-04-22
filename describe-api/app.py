@@ -95,7 +95,12 @@ def process_image(image_bytes):
 
         print(prompt, gr1, gr2, gr3)
         # Return the referenced artists
-        return jsonify({'data': get_referenced_artists(prompt)}), 200
+        return jsonify({
+            'data': {
+                'artists': get_referenced_artists(prompt),
+                'prompt': prompt
+            }
+        }), 200
 
     except requests.exceptions.HTTPError as e:
         return jsonify({'error': str(e)}), e.response.status_code
