@@ -7,19 +7,34 @@ from dotenv import load_dotenv
 import boto3
 import hashlib
 from utils import get_referenced_artists
-
-load_dotenv()
+import os
+import json
+from dotenv import dotenv_values
+import openai
 
 app = Flask(__name__)
 CORS(app)
 
 s3 = boto3.client('s3')
 
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 @app.route('/.well-known/<path:filename>')
 def well_known(filename):
     print(filename)
     return send_from_directory('static', filename)
+
+
+def generate_image_with_prompt(prompt):
+    openai.api_key = OPENAI_API_KEY
+
+    response = openai.Image.create(
+        prompt=prompt,
+        n=1,
+        size="1024x1024"
+    )
+    image_url = response['data'][0]['url']
+    return image_url
 
 
 def process_image(image_url):
@@ -38,9 +53,16 @@ def process_image(image_url):
         #         4,
         #     ]
         # }).json()
-        return requests.post("http://52.72.94.195:5000/process_image", json={
+        describe_result = requests.post("http://52.72.94.195:5000/process_image", json={
             "image_url": image_url
-        }).json(), 200
+        }).json()
+        print(describe_result)
+
+        generated_url = generate_image_with_prompt(describe_result['data']['prompt'])
+        print(generated_url)
+
+        describe_result['data']['similar_image'] = generated_url
+        return jsonify(describe_result), 200
 
         # # Extract the output data from Huggingface API response
         # output_data = huggingface_response.get('data')

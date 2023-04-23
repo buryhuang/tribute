@@ -4,7 +4,7 @@ info:
   description: REST API to process images and extract referenced artists
   version: 1.0.0
 servers:
-  - url: https://cdha7r2hmf.execute-api.us-east-1.amazonaws.com
+  - url: https://api.art-tribute.org
 paths:
   /process_image_url:
     get:

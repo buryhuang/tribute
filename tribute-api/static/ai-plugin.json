@@ -2,14 +2,14 @@
     "schema_version": "v1",
     "name_for_human": "Art Tribute",
     "name_for_model": "arttribute",
-    "description_for_human": "Search for NFT, similar arts for your creation. Attribute artists by making fair compensation real.",
-    "description_for_model": "This plugin processes images of any arts, images or NFT including AI-generated art, to identify and attribute referenced artists and on-chain copyright proof. It extracts artist information from the image and interfaces with a smart contract-based platform to ensure appropriate compensation for contributing artists.",
+    "description_for_human": "Search for NFT, similar arts for your creation. Attribute artists by real and fair compensations.",
+    "description_for_model": "Processes images of any arts, images or NFT including AI-generated art, to identify similar arts, attribute referenced artists and on-chain copyright proof. It will also generate similar prompts and arts for motivating original creation.",
     "auth": {
         "type": "none"
     },
     "api": {
         "type": "openapi",
-        "url": "https://cdha7r2hmf.execute-api.us-east-1.amazonaws.com/.well-known/openapi.yaml",
+        "url": "https://api.art-tribute.org/.well-known/openapi.yaml",
         "is_user_authenticated": false
     },
     "logo_url": "https://github.com/buryhuang/gpt4-image-inputs/raw/main/trubute_icon_only.png",

@@ -11,6 +11,7 @@ requests = "==2.27.1"
 flask-cors = "==3.0.10"
 python-dotenv = "*"
 boto3 = "*"
+openai = "*"
 
 [dev-packages]
 
