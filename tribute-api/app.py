@@ -56,12 +56,12 @@ def process_image(image_url):
         describe_result = requests.post("http://52.72.94.195:5000/process_image", json={
             "image_url": image_url
         }).json()
-        print(describe_result)
+        # print(describe_result)
 
-        generated_url = generate_image_with_prompt(describe_result['data']['prompt'])
-        print(generated_url)
+        # generated_url = generate_image_with_prompt(describe_result['data']['prompt'])
+        # print(generated_url)
 
-        describe_result['data']['similar_image'] = generated_url
+        # describe_result['data']['similar_image'] = generated_url
         return jsonify(describe_result), 200
 
         # # Extract the output data from Huggingface API response

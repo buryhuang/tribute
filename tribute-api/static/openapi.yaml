@@ -35,8 +35,33 @@ paths:
                           properties:
                             name:
                               type: string
-                      prompt:
+                      possible_prompt:
                         type: string
+                      possible_sources:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                            data:
+                              type: object
+                              properties:
+                                source:
+                                  type: string
+                                chain:
+                                  type: string
+                                offchain_address:
+                                  type: string
+                                onchain_address:
+                                  type: string
+                      similar_images:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            image_url:
+                              type: string
         '400':
           description: Missing image URL in the request
           content:
@@ -55,3 +80,4 @@ paths:
                 properties:
                   error:
                     type: string
+

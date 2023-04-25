@@ -82,7 +82,7 @@ def inference(image_bytes, mode, best_max_flavors):
         print("mode fast: " + prompt_result)
         return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
 
-def process_image(image_bytes):
+def process_image(image_bytes, image_url):
     try:
         # Generate sha256 hash of the image
         image_hash = hashlib.sha256(image_bytes).hexdigest()
@@ -98,7 +98,18 @@ def process_image(image_bytes):
         return jsonify({
             'data': {
                 'artists': get_referenced_artists(prompt),
-                'prompt': prompt
+                'possible_prompt': prompt,
+                'possible_sources': [
+                    {
+                        "type": "web",
+                        "data": {
+                            "source": "web",
+                            "chain": "",
+                            "offchain_address": image_url,
+                            "onchain_address": ""
+                        }
+                    }
+                ]
             }
         }), 200
 
@@ -118,7 +129,7 @@ def process_image_api():
         response.raise_for_status()
         image_bytes = response.content
 
-        return process_image(image_bytes)
+        return process_image(image_bytes, image_url)
 
     except requests.exceptions.HTTPError as e:
         return jsonify({'error': str(e)}), e.response.status_code
@@ -135,7 +146,7 @@ def process_image_url_api():
         response.raise_for_status()
         image_bytes = response.content
 
-        return process_image(image_bytes)
+        return process_image(image_bytes, image_url)
 
     except requests.exceptions.HTTPError as e:
         return jsonify({'error': str(e)}), e.response.status_code
