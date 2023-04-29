@@ -2,9 +2,8 @@ import os
 import sys
 import glob
 from PIL import Image
-import clip_image_search.utils as utils
 from clip_image_search import CLIPFeatureExtractor, Searcher
-from utils import pil_loader
+from clip_image_search.utils import pil_loader
 
 
 def get_image_paths(image_folder):
