@@ -2,7 +2,7 @@ import os
 import sys
 import glob
 from PIL import Image
-from clip_feature_extractor import CLIPFeatureExtractor
+from clip_image_search import CLIPFeatureExtractor
 from searcher import Searcher
 from utils import pil_loader
 
