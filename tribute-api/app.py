@@ -51,6 +51,7 @@ import sys
 
 sys.path.append('src/blip')
 sys.path.append('clip-interrogator')
+sys.path.append('clip_image_search')
 
 import gradio as gr
 from clip_interrogator import Config, Interrogator
