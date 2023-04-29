@@ -1,15 +1,14 @@
 import boto3
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from elasticsearch.helpers import bulk
-
+from dotenv import load_dotenv
 
 class Searcher:
     def __init__(self, region="us-east-1"):
-        ssm = boto3.client("ssm", region_name=region)
-        path = "/clip_image_search"
-        es_endpoint = ssm.get_parameter(Name=f"{path}/es_endpoint")["Parameter"]["Value"]
-        es_username = ssm.get_parameter(Name=f"{path}/es_master_username")["Parameter"]["Value"]
-        es_password = ssm.get_parameter(Name=f"{path}/es_master_password", WithDecryption=True)["Parameter"]["Value"]
+        load_dotenv()
+        es_endpoint = os.environ.get("ES_ENDPOINT")
+        es_username = os.environ.get("ES_USER")
+        es_password = os.environ.get("ES_PASSWORD")
 
         self.client = Elasticsearch(
             hosts=[es_endpoint],
