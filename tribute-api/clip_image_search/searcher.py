@@ -15,6 +15,7 @@ class Searcher:
         self.client = Elasticsearch(
             hosts=[es_endpoint],
             http_auth=(es_username, es_password),
+            headers={"Content-Type": "application/json"},
             # use_ssl=True,
             # verify_certs=True,
             # connection_class=RequestsHttpConnection,
