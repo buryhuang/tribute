@@ -3,6 +3,8 @@ from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from dotenv import load_dotenv
 import os
+import urllib
+
 
 def send_to_elasticsearch(endpoint, username, password):
     # create an authorization handler
