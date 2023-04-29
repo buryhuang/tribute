@@ -2,6 +2,8 @@ import boto3
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from dotenv import load_dotenv
+import os
+
 
 class Searcher:
     def __init__(self, region="us-east-1"):
@@ -18,7 +20,7 @@ class Searcher:
             # connection_class=RequestsHttpConnection,
             port=443,
         )
-        self.index_name = "image"
+        self.index_name = "art-tribute-images"
 
     def create_index(self):
         knn_index = {
