@@ -22,7 +22,7 @@ def send_to_elasticsearch(endpoint, username, password):
     urllib.request.install_opener(opener)
 
     try:
-        req = urllib.request.Request(top_level_url, data=data.encode('utf-8'),
+        req = urllib.request.Request(endpoint, data=data.encode('utf-8'),
                                      headers={'Content-Type': 'application/json'}
                                      )
         result = opener.open(req)
