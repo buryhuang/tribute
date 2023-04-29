@@ -18,6 +18,7 @@ es = Elasticsearch([{"host": ELASTICSEARCH_HOST, "port": ELASTICSEARCH_PORT}])
 # Initialize the image embedding model
 embedding_model = ImageEmbeddingModel()
 
+
 def index_image_embedding(image_path):
     # Open the image file
     with Image.open(image_path) as image:
