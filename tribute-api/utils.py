@@ -13,7 +13,7 @@ def get_referenced_artists(image_text):
         for match in matches:
             results.append({
                 'name': match,
-                'percentage': initial_percent
+                # 'percentage': initial_percent
             })
             initial_percent = initial_percent * factor
         print(results)
