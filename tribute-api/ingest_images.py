@@ -2,8 +2,8 @@ import os
 import sys
 import glob
 from PIL import Image
-from clip_image_search import CLIPFeatureExtractor
-from searcher import Searcher
+import clip_image_search.utils as utils
+from clip_image_search import CLIPFeatureExtractor, Searcher
 from utils import pil_loader
 
 

@@ -55,6 +55,8 @@ sys.path.append('clip_image_search')
 
 import gradio as gr
 from clip_interrogator import Config, Interrogator
+import clip_image_search.utils as utils
+from clip_image_search import CLIPFeatureExtractor, Searcher
 
 config = Config(clip_model_name="ViT-H-14/laion2b_s32b_b79k")
 config.device = 'cuda' if torch.cuda.is_available() else 'cpu'
