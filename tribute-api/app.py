@@ -8,8 +8,7 @@ import boto3
 import hashlib
 from utils import get_referenced_artists
 from PIL import Image
-import io 
-
+import io
 
 load_dotenv()
 
@@ -82,6 +81,7 @@ def inference(image_bytes, mode, best_max_flavors):
         print("mode fast: " + prompt_result)
         return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
 
+
 def process_image(image_bytes, image_url):
     try:
         # # Generate sha256 hash of the image
@@ -91,7 +91,7 @@ def process_image(image_bytes, image_url):
         # s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
 
         # Send the raw image bytes to Huggingface API
-        prompt, gr1, gr2, gr3  = inference(image_bytes, 'classic', 4)
+        prompt, gr1, gr2, gr3 = inference(image_bytes, 'classic', 4)
 
         print(prompt, gr1, gr2, gr3)
         # Return the referenced artists
@@ -115,6 +115,12 @@ def process_image(image_bytes, image_url):
 
     except requests.exceptions.HTTPError as e:
         return jsonify({'error': str(e)}), e.response.status_code
+
+
+@app.route('/.well-known/<path:filename>')
+def well_known(filename):
+    print(filename)
+    return send_from_directory('static', filename)
 
 
 @app.route('/process_image', methods=['POST'])
