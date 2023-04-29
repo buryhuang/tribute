@@ -18,7 +18,7 @@ class Searcher:
             # use_ssl=True,
             # verify_certs=True,
             # connection_class=RequestsHttpConnection,
-            port=443,
+            # port=443,
         )
         self.index_name = "art-tribute-images"
 
