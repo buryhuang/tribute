@@ -84,11 +84,11 @@ def inference(image_bytes, mode, best_max_flavors):
 
 def process_image(image_bytes, image_url):
     try:
-        # Generate sha256 hash of the image
-        image_hash = hashlib.sha256(image_bytes).hexdigest()
-
-        # Save the image to s3 bucket
-        s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
+        # # Generate sha256 hash of the image
+        # image_hash = hashlib.sha256(image_bytes).hexdigest()
+        #
+        # # Save the image to s3 bucket
+        # s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
 
         # Send the raw image bytes to Huggingface API
         prompt, gr1, gr2, gr3  = inference(image_bytes, 'classic', 4)
