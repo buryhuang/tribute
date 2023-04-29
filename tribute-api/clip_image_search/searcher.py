@@ -1,5 +1,5 @@
 import boto3
-from elasticsearch import Elasticsearch, RequestsHttpConnection
+from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
 from dotenv import load_dotenv
 
@@ -15,7 +15,7 @@ class Searcher:
             http_auth=(es_username, es_password),
             use_ssl=True,
             verify_certs=True,
-            connection_class=RequestsHttpConnection,
+            # connection_class=RequestsHttpConnection,
             port=443,
         )
         self.index_name = "image"
