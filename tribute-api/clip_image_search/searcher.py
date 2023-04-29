@@ -4,6 +4,7 @@ from elasticsearch.helpers import bulk
 from dotenv import load_dotenv
 import os
 import urllib
+import ssl
 
 
 def send_to_elasticsearch(endpoint, username, password):
