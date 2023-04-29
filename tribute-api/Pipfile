@@ -12,6 +12,10 @@ flask-cors = "==3.0.10"
 python-dotenv = "*"
 boto3 = "*"
 openai = "*"
+python-dotenv = "*"
+boto3 = "*"
+gradio = "*"
+clip-interrogator = "*"
 
 [dev-packages]
 
