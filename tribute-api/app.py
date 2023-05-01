@@ -10,6 +10,9 @@ from utils import get_referenced_artists
 from PIL import Image
 import io
 
+from clip_image_search import CLIPFeatureExtractor, Searcher
+from clip_image_search.utils import pil_loader
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -87,11 +90,18 @@ def inference(image_bytes, mode, best_max_flavors):
 
 def process_image(image_bytes, image_url):
     try:
-        # # Generate sha256 hash of the image
-        # image_hash = hashlib.sha256(image_bytes).hexdigest()
-        #
-        # # Save the image to s3 bucket
-        # s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
+        # Generate sha256 hash of the image
+        image_hash = hashlib.sha256(image_bytes).hexdigest()
+
+        # Save the image to s3 bucket
+        s3.put_object(Body=image_bytes, Bucket='arthornors-images', Key=f"{image_hash}.png")
+
+        # Feature Search for NFT
+        extractor = CLIPFeatureExtractor()
+        searcher = Searcher()
+        image = pil_loader(path)
+        features = extractor.get_image_features([image])[0]
+        nft_matches = searcher.knn_search(features, k=10)
 
         # Send the raw image bytes to Huggingface API
         prompt, gr1, gr2, gr3 = inference(image_bytes, 'classic', 4)
@@ -102,6 +112,7 @@ def process_image(image_bytes, image_url):
             'data': {
                 'artists': get_referenced_artists(prompt),
                 'possible_prompt': prompt,
+                'nft_matches': nft_matches,
                 'possible_sources': [
                     {
                         "type": "web",

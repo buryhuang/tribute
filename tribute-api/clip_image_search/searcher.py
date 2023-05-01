@@ -24,6 +24,7 @@ def send_to_elasticsearch(endpoint, username, password, data):
                                      headers={"Content-Type": "application/json"})
         result = opener.open(req)
         messages = result.read()
+        return messages
     except IOError as e:
         print(e)
 
@@ -71,9 +72,6 @@ class Searcher:
     def knn_search(self, query_features, k=10):
         body = {
             "size": k,
-            "_source": {
-                "exclude": ["feature_vector"],
-            },
             "query": {
                 "knn": {
                     "feature_vector": {
@@ -84,4 +82,10 @@ class Searcher:
             },
         }
         endpoint = f"{self.es_endpoint}/{self.index_name}/_search"
-        send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(body))
+        response_data = send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(body),
+                                              method="POST")
+        if response_data:
+            response_json = json.loads(response_data)
+            return response_json.get("hits", {}).get("hits", [])
+        else:
+            return []
