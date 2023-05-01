@@ -33,6 +33,8 @@ def main(image_folder_path):
                 continue
 
             try:
+                image_file = open(path, "rb")
+                image_hash = hashlib.sha256(image_file.read()).hexdigest()
                 image = pil_loader(path)
                 features = extractor.get_image_features([image])[0]
 
@@ -47,6 +49,7 @@ def main(image_folder_path):
                     }
 
                 yield {
+                    "_id": image_hash,
                     "timestamp": int(os.path.getmtime(path)),
                     "created_at": int(os.path.getmtime(path)),
                     "indexed_at": int(time.time() * 1000),
