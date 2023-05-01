@@ -105,6 +105,10 @@ def process_image(image_bytes, image_url):
         image = Image.open(image_file).convert('RGB')
         features = extractor.get_image_features([image])[0]
         nft_matches = searcher.knn_search(features, k=10)
+        nft_metats = []
+        for nft_match in nft_matches:
+            if 'metadata' in nft_match:
+                nft_metats.append(nft_match['metadata'])
 
         # Send the raw image bytes to Huggingface API
         prompt, gr1, gr2, gr3 = inference(image_bytes, 'classic', 4)
@@ -115,7 +119,7 @@ def process_image(image_bytes, image_url):
             'data': {
                 'artists': get_referenced_artists(prompt),
                 'possible_prompt': prompt,
-                'nft_matches': nft_matches,
+                'nft_matches': nft_metats,
                 'possible_sources': [
                     {
                         "type": "web",
