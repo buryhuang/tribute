@@ -17,7 +17,7 @@ def main(image_folder_path):
     image_paths = get_image_paths(image_folder_path)
     extractor = CLIPFeatureExtractor()
     searcher = Searcher()
-    searcher.create_index()
+    # searcher.create_index()
 
     def generate_data():
         for path in image_paths:

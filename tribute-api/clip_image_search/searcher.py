@@ -7,6 +7,7 @@ import urllib
 import ssl
 import json
 
+
 def send_to_elasticsearch(endpoint, username, password, data):
     # create an authorization handler
     p = urllib.request.HTTPPasswordMgrWithDefaultRealm()
@@ -65,7 +66,8 @@ class Searcher:
             },
         }
         # return self.client.indices.create(index=self.index_name, body=knn_index, ignore=400)
-        send_to_elasticsearch(f"{self.es_endpoint}/{self.index_name}", self.es_username, self.es_password, json.dumps(knn_index))
+        send_to_elasticsearch(f"{self.es_endpoint}/{self.index_name}", self.es_username, self.es_password,
+                              json.dumps(knn_index))
 
     def bulk_ingest(self, generate_data, chunk_size=128):
         return bulk(self.client, generate_data, chunk_size=chunk_size)
