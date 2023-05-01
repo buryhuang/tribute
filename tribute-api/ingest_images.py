@@ -51,7 +51,7 @@ def main(image_folder_path):
             except Exception as e:
                 print(f"Error processing image {path}: {e}")
 
-    searcher.bulk_ingest(generate_data)
+    searcher.bulk_ingest(generate_data(), chunk_size=128)
 
 
 if __name__ == "__main__":
