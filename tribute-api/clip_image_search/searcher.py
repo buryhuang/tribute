@@ -82,8 +82,7 @@ class Searcher:
             },
         }
         endpoint = f"{self.es_endpoint}/{self.index_name}/_search"
-        response_data = send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(body),
-                                              method="POST")
+        response_data = send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(body))
         if response_data:
             response_json = json.loads(response_data)
             return response_json.get("hits", {}).get("hits", [])
