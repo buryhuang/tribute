@@ -50,11 +50,9 @@ def main(image_folder_path):
                     "timestamp": int(os.path.getmtime(path)),
                     "created_at": int(os.path.getmtime(path)),
                     "indexed_at": int(time.time() * 1000),
-                    "image_data": {
-                        "path": path,
-                        "feature_vector": features,
-                        "metadata": metadata
-                    },
+                    "feature_vector": features,
+                    "path": path,
+                    "metadata": metadata
                 }
             except Exception as e:
                 print(f"Error processing image {path}: {e}")
