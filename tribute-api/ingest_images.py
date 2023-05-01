@@ -27,6 +27,8 @@ def main(image_folder_path):
                 image = pil_loader(path)
                 features = extractor.get_image_features([image])[0]
 
+                print("Image features:", features)
+
                 metadata_path = os.path.splitext(path)[0] + ".json"
                 if os.path.exists(metadata_path):
                     with open(metadata_path, "r") as metadata_file:
