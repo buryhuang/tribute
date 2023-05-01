@@ -3,6 +3,7 @@ import sys
 import glob
 import json
 from PIL import Image
+import hashlib
 
 sys.path.append('clip_image_search')
 from clip_image_search import CLIPFeatureExtractor, Searcher
