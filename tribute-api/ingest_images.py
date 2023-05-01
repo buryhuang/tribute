@@ -46,9 +46,10 @@ def main(image_folder_path):
                     }
 
                 yield {
-                    "_op_type": "index",
-                    "_index": searcher.index_name,
-                    "_source": {
+                    "timestamp": int(os.path.getmtime(path)),
+                    "created_at": int(os.path.getmtime(path)),
+                    "indexed_at": int(time.time() * 1000),
+                    "image_data": {
                         "path": path,
                         "feature_vector": features,
                         "metadata": metadata
