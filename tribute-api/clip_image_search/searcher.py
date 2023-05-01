@@ -1,17 +1,14 @@
 import boto3
-from elasticsearch import Elasticsearch
-from elasticsearch.helpers import bulk
-from dotenv import load_dotenv
-import os
-import urllib
-import ssl
 import json
+import os
+import ssl
+import urllib
+from dotenv import load_dotenv
 
 
 def send_to_elasticsearch(endpoint, username, password, data):
-    # create an authorization handler
     p = urllib.request.HTTPPasswordMgrWithDefaultRealm()
-    p.add_password(None, endpoint, username, password);
+    p.add_password(None, endpoint, username, password)
 
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
@@ -23,12 +20,10 @@ def send_to_elasticsearch(endpoint, username, password, data):
     urllib.request.install_opener(opener)
 
     try:
-        req = urllib.request.Request(endpoint, data=data.encode('utf-8'),
-                                     headers={'Content-Type': 'application/json'}
-                                     )
+        req = urllib.request.Request(endpoint, data=data.encode("utf-8"),
+                                     headers={"Content-Type": "application/json"})
         result = opener.open(req)
         messages = result.read()
-        # print(messages)
     except IOError as e:
         print(e)
 
@@ -39,16 +34,6 @@ class Searcher:
         self.es_endpoint = os.environ.get("ES_ENDPOINT")
         self.es_username = os.environ.get("ES_USER")
         self.es_password = os.environ.get("ES_PASSWORD")
-
-        self.client = Elasticsearch(
-            hosts=[self.es_endpoint],
-            http_auth=(self.es_username, self.es_password),
-            headers={"Content-Type": "application/json"},
-            # use_ssl=True,
-            # verify_certs=True,
-            # connection_class=RequestsHttpConnection,
-            # port=443,
-        )
         self.index_name = "art-tribute-images"
 
     def create_index(self):
@@ -65,12 +50,13 @@ class Searcher:
                 }
             },
         }
-        # return self.client.indices.create(index=self.index_name, body=knn_index, ignore=400)
         send_to_elasticsearch(f"{self.es_endpoint}/{self.index_name}", self.es_username, self.es_password,
                               json.dumps(knn_index))
 
-    def bulk_ingest(self, generate_data, chunk_size=128):
-        return bulk(self.client, generate_data, chunk_size=chunk_size)
+    def bulk_ingest(self, generate_data):
+        for data in generate_data():
+            endpoint = f"{self.es_endpoint}/{self.index_name}/_doc"
+            send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(data))
 
     def knn_search(self, query_features, k=10):
         body = {
@@ -87,4 +73,5 @@ class Searcher:
                 }
             },
         }
-        return self.client.search(index=self.index_name, body=body)
+        endpoint = f"{self.es_endpoint}/{self.index_name}/_search"
+        send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(body))
