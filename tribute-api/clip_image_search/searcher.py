@@ -53,10 +53,20 @@ class Searcher:
         send_to_elasticsearch(f"{self.es_endpoint}/{self.index_name}", self.es_username, self.es_password,
                               json.dumps(knn_index))
 
-    def bulk_ingest(self, generate_data):
-        for data in generate_data():
-            endpoint = f"{self.es_endpoint}/{self.index_name}/_doc"
-            send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(data))
+    def bulk_ingest(self, generate_data, chunk_size=128):
+        data_chunk = []
+        for data in generate_data:
+            data_chunk.append(data)
+            if len(data_chunk) >= chunk_size:
+                for item in data_chunk:
+                    endpoint = f"{self.es_endpoint}/{self.index_name}/_doc"
+                    send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(item))
+                data_chunk = []
+
+        if data_chunk:
+            for item in data_chunk:
+                endpoint = f"{self.es_endpoint}/{self.index_name}/_doc"
+                send_to_elasticsearch(endpoint, self.es_username, self.es_password, json.dumps(item))
 
     def knn_search(self, query_features, k=10):
         body = {
