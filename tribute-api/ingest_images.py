@@ -8,6 +8,7 @@ sys.path.append('clip_image_search')
 from clip_image_search import CLIPFeatureExtractor, Searcher
 from clip_image_search.utils import pil_loader
 
+import time
 
 def get_image_paths(image_folder):
     return glob.glob(os.path.join(image_folder, "**", "*"), recursive=True)
