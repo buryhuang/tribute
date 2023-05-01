@@ -107,10 +107,11 @@ def process_image(image_bytes, image_url):
         nft_matches = searcher.knn_search(features, k=5)
         nft_metadatas = []
         for nft_match in nft_matches:
-            print(nft_match)
-            if 'metadata' in nft_match:
-                print(nft_match['metadata'])
-                nft_metadatas.append(nft_match['metadata'])
+            if 'metadata' in nft_match['_source']:
+                nft_metadatas.append({
+                    'score': nft_match['_score'],
+                    'metadata': nft_match['_source']['metadata']
+                })
 
         # Send the raw image bytes to Huggingface API
         prompt, gr1, gr2, gr3 = inference(image_bytes, 'classic', 4)
