@@ -9,6 +9,8 @@ import hashlib
 from utils import get_referenced_artists
 from PIL import Image
 import io
+from io import BytesIO
+
 
 from clip_image_search import CLIPFeatureExtractor, Searcher
 from clip_image_search.utils import pil_loader
@@ -99,7 +101,8 @@ def process_image(image_bytes, image_url):
         # Feature Search for NFT
         extractor = CLIPFeatureExtractor()
         searcher = Searcher()
-        image = pil_loader(path)
+        image_file = BytesIO(image_bytes)
+        image = Image.open(image_file).convert('RGB')
         features = extractor.get_image_features([image])[0]
         nft_matches = searcher.knn_search(features, k=10)
 
