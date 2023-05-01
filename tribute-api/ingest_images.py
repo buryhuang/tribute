@@ -23,13 +23,19 @@ def main(image_folder_path):
         for path in image_paths:
             if not os.path.isfile(path):
                 continue
+
+            root_ext = os.path.splitext(path)
+            image_base_path = root_ext[0]
+            image_ext = root_ext[1].lower()
+
+            if image_ext not in [".jpg", ".jpeg", ".png"]:
+                continue
+
             try:
                 image = pil_loader(path)
                 features = extractor.get_image_features([image])[0]
 
-                print("Image features:", features)
-
-                metadata_path = os.path.splitext(path)[0] + ".json"
+                metadata_path = image_base_path + ".json"
                 if os.path.exists(metadata_path):
                     with open(metadata_path, "r") as metadata_file:
                         metadata = json.load(metadata_file)
