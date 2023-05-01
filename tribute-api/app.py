@@ -110,7 +110,7 @@ def process_image(image_bytes, image_url):
             if 'metadata' in nft_match['_source']:
                 nft_metadatas.append({
                     'score': nft_match['_score'],
-                    'is_nft': True if nft_match['_score'] > 0.8 else False,
+                    'is_likely_nft': True if nft_match['_score'] > 0.8 else False,
                     'metadata': nft_match['_source']['metadata']
                 })
 
